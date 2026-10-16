@@ -10,13 +10,15 @@ const BASE = "You are the warm, concise reflection writer in Tiny Wins. Use only
 export class GrowthAiError extends Error {}
 
 function safeGatewayMessage(status: number, body: unknown) {
+  if ((status === 402 || status === 403) && body && typeof body === "object") {
+    const detail = "error" in body && body.error && typeof body.error === "object" ? body.error : body;
+    if ("message" in detail && typeof detail.message === "string") return detail.message.slice(0, 600);
+  }
   if (status === 402) return "AI credits are currently unavailable. The workspace owner can check Plans & credits.";
   if (status === 403) return "AI access is currently blocked. A workspace admin needs to review AI access and usage settings.";
   if (status === 401) return "AI is not configured correctly. Please contact the app owner.";
   if (status === 404) return "The configured AI service is unavailable. Please contact the app owner.";
   if (status === 429) return "AI is busy right now. Please wait a little before trying again.";
-  // Only accept the gateway's explicitly safe, user-facing message on credit errors.
-  if (body && typeof body === "object" && "message" in body && typeof body.message === "string" && status === 402) return body.message.slice(0, 600);
   return "We couldn't generate your reflection right now. Please try again later.";
 }
 
@@ -51,7 +53,9 @@ async function generate<S extends z.ZodType>(schema: S, instructions: string, re
     if (gatewayError) throw new GrowthAiError(gatewayError);
     if (NoObjectGeneratedError.isInstance(error)) {
       // Recover the same response without making a second billed request.
-      try { return schema.parse(JSON.parse(error.text)); } catch { /* unusable or refused output */ }
+      try {
+        if (error.text) return schema.parse(JSON.parse(error.text));
+      } catch { /* unusable or refused output */ }
       throw new GrowthAiError("AI couldn't provide a usable reflection. No reflection was saved.");
     }
     throw new GrowthAiError("We couldn't generate your reflection right now. Please try again later.");
