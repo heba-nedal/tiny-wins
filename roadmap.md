@@ -1,4 +1,5 @@
 # Tiny Wins enhancements
+- [ ] Phase 2: add on-demand Your Month in Wins and Grow This Win using owner-scoped records; verify data rules, AI calls, and available UI flows without changing schema/auth/garden.
 - [x] Preserve existing authentication, achievements schema, CRUD, and routes.
 - [x] Refine category cards, progress story, and decorative growth journey.
 - [x] Original Supabase project reconnected by user (ref uqksijjpgjlbulqyknvv); REST and auth endpoints verified reachable.
