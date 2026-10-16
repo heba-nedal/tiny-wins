@@ -23,7 +23,7 @@ const win = (id: string, category: Win["category"], title: string): Win => ({
 });
 
 /** The garden links to /gallery, so it needs a router — a tiny standalone tree keeps the app's auth gate out of the test. */
-function renderGarden(wins: Win[]) {
+async function renderGarden(wins: Win[]) {
   const onAdd = vi.fn();
   const root = createRootRoute({ component: () => <Outlet /> });
   const home = createRoute({
@@ -36,6 +36,7 @@ function renderGarden(wins: Win[]) {
     routeTree: root.addChildren([home, gallery]),
     history: createMemoryHistory({ initialEntries: ["/"] }),
   });
+  await router.start();
   render(<RouterProvider router={router} />);
   return { onAdd };
 }
