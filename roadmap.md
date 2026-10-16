@@ -1,4 +1,5 @@
 # Tiny Wins enhancements
+- [x] Win Garden: show the user's supplied garden illustration as a local project asset in place of the generated plant SVG; Total wins / Categories / Flowers bloomed stay derived from real achievements; database, auth and other sections untouched.
 - [x] Phase 2: add on-demand Your Month in Wins and Grow This Win using owner-scoped records; 40 tests passed, both new gateway calls returned validated reflections, public routes checked, latest build OK; schema/auth/garden unchanged.
 - [ ] Phase 2 authenticated UI and live cross-account denial verification (blocked: external unmanaged Supabase has no available managed testing session).
 - [x] Preserve existing authentication, achievements schema, CRUD, and routes.
