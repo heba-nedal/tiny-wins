@@ -47,7 +47,7 @@ describe("groupWinsByMonth", () => {
       w("2026-10-16", "2026-10-16T10:00:00Z", "late"),
     ]);
     expect(groups.map((g) => g.label)).toEqual(["October 2026", "August 2026"]);
-    expect(groups[0].wins.map((x) => x.title)).toEqual(["late", "early"]);
+    expect(groups[0]?.wins.map((x) => x.title)).toEqual(["late", "early"]);
   });
 
   it("keeps multiple wins sharing the same date without duplication", () => {
@@ -56,6 +56,6 @@ describe("groupWinsByMonth", () => {
       w("2026-10-16", "2026-10-16T08:00:00Z", "b"),
     ]);
     expect(groups).toHaveLength(1);
-    expect(groups[0].wins).toHaveLength(2);
+    expect(groups[0]?.wins).toHaveLength(2);
   });
 });

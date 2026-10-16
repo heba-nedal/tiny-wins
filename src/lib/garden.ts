@@ -31,7 +31,8 @@ function hashId(id: string): number {
 
 export function plantFor(win: Win): Plant {
   const h = hashId(win.id);
-  const variant: PlantVariant = (["sprout", "leaf", "flower"] as const)[h % 3];
+  const variants: readonly PlantVariant[] = ["sprout", "leaf", "flower"];
+  const variant = variants[h % 3] ?? "sprout";
   const scale = 0.85 + ((h >> 3) % 7) * 0.05;
   const delay = ((h >> 6) % 40) / 10;
   const jitter = ((h >> 10) % 5) * 3;
