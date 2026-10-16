@@ -6,10 +6,10 @@ import { StepsIllustration } from "@/components/brand";
 import { WinCard } from "@/components/win-card";
 import { WinFormDialog } from "@/components/win-form-dialog";
 import { WinsState } from "@/components/wins-state";
-import { NextWinCard } from "@/components/next-win-card";
+import { GrowthStory } from "@/components/growth-story";
+import { WinGarden } from "@/components/win-garden";
 import { useWins } from "@/hooks/use-wins";
-import { countThisMonth, type Win } from "@/lib/wins";
-import { suggestionToWin } from "@/lib/next-win";
+import { countThisMonth } from "@/lib/wins";
 import { ProgressStory } from "@/components/progress-story";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -28,8 +28,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 
 function Dashboard() {
   const [adding, setAdding] = useState(false);
-  const [prefill, setPrefill] = useState<Win | null>(null);
-  const { data, isLoading, error } = useWins();
+  const { data, isLoading, error, refetch } = useWins();
   const wins = data ?? [];
 
   return (
@@ -38,7 +37,7 @@ function Dashboard() {
         <div className="space-y-5">
           <h1 className="text-4xl font-semibold leading-tight md:text-5xl">Small steps.<br />Real progress.</h1>
           <p className="text-lg text-muted-foreground">Every little achievement deserves a place.</p>
-          <Button size="lg" onClick={() => { setPrefill(null); setAdding(true); }}><Plus /> Add a Win</Button>
+          <Button size="lg" onClick={() => setAdding(true)}><Plus /> Add a Win</Button>
           <dl className="flex gap-8 pt-4">
             <div><dt className="text-sm text-muted-foreground">Total wins</dt><dd className="font-display text-3xl text-heading">{isLoading || error ? "–" : wins.length}</dd></div>
             <div><dt className="text-sm text-muted-foreground">This month</dt><dd className="font-display text-3xl text-heading">{isLoading || error ? "–" : countThisMonth(wins)}</dd></div>
@@ -49,7 +48,8 @@ function Dashboard() {
 
       {!isLoading && !error && <ProgressStory wins={wins} />}
 
-      <NextWinCard onAdd={(s) => { setPrefill(suggestionToWin(s)); setAdding(true); }} />
+      <GrowthStory wins={wins} isLoading={isLoading} error={error} onRetry={() => refetch()} onAdd={() => setAdding(true)} />
+      <WinGarden wins={wins} onAdd={() => setAdding(true)} />
 
       <section className="space-y-5">
         <div className="flex items-end justify-between">
@@ -62,7 +62,7 @@ function Dashboard() {
           </div>
         </WinsState>
       </section>
-      <WinFormDialog open={adding} onOpenChange={(o) => { setAdding(o); if (!o) setPrefill(null); }} win={prefill} />
+      <WinFormDialog open={adding} onOpenChange={setAdding} />
     </div>
   );
 }

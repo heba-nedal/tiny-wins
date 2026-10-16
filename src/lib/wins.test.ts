@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { validateWin, countThisMonth, progressStory } from "./wins";
+import { validateWin, countThisMonth, progressStory, groupWinsByMonth, type Win } from "./wins";
 
 const ok = { title: "Ran 5k", description: "", category: "health_habits" as const, achievement_date: "2026-10-01" };
 
@@ -33,5 +33,29 @@ describe("progressStory", () => {
   });
   it("does not invent progress for empty records", () => {
     expect(progressStory([], new Date(2026, 9, 16))).toEqual({ total: 0, thisMonth: 0, activeMonths: 0, categories: 0, firstDate: null, latestDate: null, leadingCategory: null });
+  });
+});
+
+describe("groupWinsByMonth", () => {
+  const w = (achievement_date: string, created_at: string, title = "t"): Win =>
+    ({ id: title, title, description: null, category: "everyday", achievement_date, created_at, user_id: "u" });
+
+  it("groups newest month first and sorts wins inside each month", () => {
+    const groups = groupWinsByMonth([
+      w("2026-08-20", "2026-08-20T10:00:00Z", "aug"),
+      w("2026-10-02", "2026-10-02T10:00:00Z", "early"),
+      w("2026-10-16", "2026-10-16T10:00:00Z", "late"),
+    ]);
+    expect(groups.map((g) => g.label)).toEqual(["October 2026", "August 2026"]);
+    expect(groups[0]?.wins.map((x) => x.title)).toEqual(["late", "early"]);
+  });
+
+  it("keeps multiple wins sharing the same date without duplication", () => {
+    const groups = groupWinsByMonth([
+      w("2026-10-16", "2026-10-16T09:00:00Z", "a"),
+      w("2026-10-16", "2026-10-16T08:00:00Z", "b"),
+    ]);
+    expect(groups).toHaveLength(1);
+    expect(groups[0]?.wins).toHaveLength(2);
   });
 });
