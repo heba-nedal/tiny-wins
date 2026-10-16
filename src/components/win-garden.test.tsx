@@ -36,7 +36,7 @@ async function renderGarden(wins: Win[]) {
     routeTree: root.addChildren([home, gallery]),
     history: createMemoryHistory({ initialEntries: ["/"] }),
   });
-  await router.start();
+  await router.load();
   render(<RouterProvider router={router} />);
   return { onAdd };
 }
