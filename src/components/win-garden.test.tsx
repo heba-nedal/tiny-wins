@@ -53,8 +53,8 @@ const threeWins = [
 afterEach(cleanup);
 
 describe("WinGarden illustration", () => {
-  it("shows the local garden image instead of generated plants", () => {
-    renderGarden(threeWins);
+  it("shows the local garden image instead of generated plants", async () => {
+    await renderGarden(threeWins);
 
     const img = screen.getByRole("img");
     expect(img.getAttribute("src")).toMatch(/win-garden\.png$/);
@@ -64,8 +64,8 @@ describe("WinGarden illustration", () => {
 });
 
 describe("WinGarden stats", () => {
-  it("reports the wins it was given, not a fixed number", () => {
-    renderGarden(threeWins);
+  it("reports the wins it was given, not a fixed number", async () => {
+    await renderGarden(threeWins);
 
     expect(statValue("Total wins")).toBe("3");
     expect(statValue("Categories")).toBe("2");
@@ -78,8 +78,8 @@ describe("WinGarden stats", () => {
     );
   });
 
-  it("follows the data when the wins change", () => {
-    renderGarden([
+  it("follows the data when the wins change", async () => {
+    await renderGarden([
       win("d4", "learning", "Practiced a chord"),
       win("e5", "learning", "Reviewed notes"),
     ]);
@@ -90,8 +90,8 @@ describe("WinGarden stats", () => {
 });
 
 describe("WinGarden empty state", () => {
-  it("waits for a first win and offers the record button", () => {
-    const { onAdd } = renderGarden([]);
+  it("waits for a first win and offers the record button", async () => {
+    const { onAdd } = await renderGarden([]);
 
     expect(screen.queryByRole("img")).toBeNull();
     expect(screen.getByRole("heading", { name: /garden is waiting to grow/i })).toBeInTheDocument();
