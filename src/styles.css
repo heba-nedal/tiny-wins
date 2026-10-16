@@ -76,3 +76,16 @@
   }
   h1, h2, h3 { font-family: var(--font-display); color: var(--color-heading); letter-spacing: 0; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .garden-sway {
+    animation: garden-sway 5.5s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+}
+
+@keyframes garden-sway {
+  0%, 100% { transform: rotate(-1.2deg); }
+  50% { transform: rotate(1.2deg); }
+}

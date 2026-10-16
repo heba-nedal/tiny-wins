@@ -51,5 +51,24 @@ export function progressStory(wins: Pick<Win, "achievement_date" | "category">[]
   };
 }
 
+export type WinMonthGroup = { key: string; label: string; wins: Win[] };
+
+const monthLabel = (key: string) =>
+  new Date(`${key}-01T00:00:00`).toLocaleDateString(undefined, { year: "numeric", month: "long" });
+
+export function groupWinsByMonth(wins: Win[]): WinMonthGroup[] {
+  const sorted = [...wins].sort(
+    (a, b) => b.achievement_date.localeCompare(a.achievement_date) || b.created_at.localeCompare(a.created_at),
+  );
+  const groups = new Map<string, WinMonthGroup>();
+  for (const win of sorted) {
+    const key = win.achievement_date.slice(0, 7);
+    const group = groups.get(key) ?? { key, label: monthLabel(key), wins: [] };
+    group.wins.push(win);
+    groups.set(key, group);
+  }
+  return [...groups.values()];
+}
+
 export const formatDate = (d: string) =>
   new Date(d + "T00:00:00").toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
