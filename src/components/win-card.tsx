@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { categoryMeta, formatDate, type Win } from "@/lib/wins";
 import { useDeleteWin } from "@/hooks/use-wins";
 import { WinFormDialog } from "./win-form-dialog";
+import { GrowWin } from "./grow-win";
 
 export function CategoryIcon({ win }: { win: Win }) {
   const m = categoryMeta(win.category);
@@ -50,11 +51,12 @@ export function WinCard({ win }: { win: Win }) {
               <CategoryIcon win={win} />
               <span className="text-sm text-muted-foreground">{m.label} · {formatDate(win.achievement_date)}</span>
             </div>
-            <DialogTitle className="break-words font-display text-2xl text-heading">{win.title}</DialogTitle>
-            <DialogDescription className="whitespace-pre-wrap pt-2 text-base text-foreground">
+            <DialogTitle dir="auto" className="break-words font-display text-2xl text-heading">{win.title}</DialogTitle>
+            <DialogDescription dir="auto" className="whitespace-pre-wrap pt-2 text-base text-foreground">
               {win.description || "No description added."}
             </DialogDescription>
           </DialogHeader>
+          <GrowWin key={`${win.id}:${win.title}:${win.description}:${win.category}:${win.achievement_date}`} id={win.id} />
           <div className="flex justify-end gap-2 pt-4">
             <Button variant="ghost" onClick={() => setConfirm(true)}><Trash2 /> Delete</Button>
             <Button variant="outline" onClick={() => { setOpen(false); setEditing(true); }}><Pencil /> Edit</Button>

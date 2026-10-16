@@ -2,6 +2,7 @@ import { Plus, RefreshCw, Sprout } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { categoryMeta, formatDate, groupWinsByMonth, type Win } from "@/lib/wins";
+import { MonthlyReflectionCard } from "./monthly-reflection";
 
 export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
   wins: Win[];
@@ -18,6 +19,7 @@ export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
         <h2 id="growth-story-title" className="text-2xl font-semibold">My Growth Story</h2>
       </div>
       <p className="mt-1 text-muted-foreground">Every small win is part of a bigger story.</p>
+      <MonthlyReflectionCard />
       <div className="mt-5">
         {isLoading ? (
           <div className="space-y-3" aria-hidden>
