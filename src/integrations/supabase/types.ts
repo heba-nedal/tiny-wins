@@ -44,6 +44,54 @@ export type Database = {
         }
         Relationships: []
       }
+      future_letters: {
+        Row: {
+          created_at: string
+          deliver_at: string
+          email_attempts: number
+          email_claimed_at: string | null
+          email_last_error: string | null
+          email_sent_at: string | null
+          email_status: string
+          id: string
+          message: string
+          timezone: string | null
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          deliver_at: string
+          email_attempts?: number
+          email_claimed_at?: string | null
+          email_last_error?: string | null
+          email_sent_at?: string | null
+          email_status?: string
+          id?: string
+          message: string
+          timezone?: string | null
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          deliver_at?: string
+          email_attempts?: number
+          email_claimed_at?: string | null
+          email_last_error?: string | null
+          email_sent_at?: string | null
+          email_status?: string
+          id?: string
+          message?: string
+          timezone?: string | null
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
