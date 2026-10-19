@@ -9,3 +9,4 @@
 - [x] Add authenticated, on-demand structured next-step recommendations (Lovable AI; per-request billing). Implemented and verified with a live gateway call; in-app click-through still needs a signed-in session.
 - [x] Phase 1 (user spec, 2026-10-16): replace the "Your Next Little Win" card with the My Growth Story month-grouped timeline and add the data-driven Win Garden (deterministic per-achievement plants, stats, accessible detail dialog); dashboard order is welcome/stats → progress story → growth story → win garden → recent wins. AI suggestion backend kept intact but no longer surfaced.
 - [ ] Add owned goals with duplicate-safe save and CRUD (inspect existing schema first).
+- [ ] Letters to Myself: dashboard card, letters page, future_letters table with RLS, scheduled real email delivery (blocked: sender email domain setup).
