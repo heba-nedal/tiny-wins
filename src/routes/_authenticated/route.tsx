@@ -32,6 +32,7 @@ function Layout() {
           <nav className="flex items-center gap-1">
             <Link to="/dashboard" className={nav} activeProps={{ className: "bg-sage text-heading" }}>Dashboard</Link>
             <Link to="/gallery" className={nav} activeProps={{ className: "bg-sage text-heading" }}>Gallery</Link>
+            <Link to="/letters" className={nav} activeProps={{ className: "bg-sage text-heading" }}>Letters</Link>
             <Button variant="ghost" size="sm" onClick={signOut} aria-label="Sign out"><LogOut /> <span className="hidden sm:inline">Sign out</span></Button>
           </nav>
         </div>
