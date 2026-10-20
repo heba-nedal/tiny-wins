@@ -11,6 +11,8 @@ import { WinGarden } from "@/components/win-garden";
 import { useWins } from "@/hooks/use-wins";
 import { countThisMonth } from "@/lib/wins";
 import { ProgressStory } from "@/components/progress-story";
+import { LettersCard } from "@/components/letters-card";
+import { LetterFormDialog } from "@/components/letter-form-dialog";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
@@ -28,6 +30,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 
 function Dashboard() {
   const [adding, setAdding] = useState(false);
+  const [writing, setWriting] = useState(false);
   const { data, isLoading, error, refetch } = useWins();
   const wins = data ?? [];
 
@@ -50,6 +53,8 @@ function Dashboard() {
 
       <GrowthStory wins={wins} isLoading={isLoading} error={error} onRetry={() => refetch()} onAdd={() => setAdding(true)} />
       <WinGarden wins={wins} onAdd={() => setAdding(true)} />
+      <LettersCard onWrite={() => setWriting(true)} />
+      <LetterFormDialog open={writing} onOpenChange={setWriting} />
 
       <section className="space-y-5">
         <div className="flex items-end justify-between">
