@@ -15,3 +15,4 @@
 - Restore and inspect the original backend before adding AI or goals; never provision a replacement connection for a remix without the user's approval.
 - Lovable AI calls live in a server-only `*.server.ts` module (gateway helpers in `src/lib/run-id.ts`) and are imported dynamically inside `*.functions.ts` handlers; protected server functions rely on the `attachSupabaseAuth` client middleware registered in `src/start.ts` to attach the bearer token.
 - Growth AI uses narrowly scoped authenticated RPCs and paginated owner-filtered reads; achievement DATE month boundaries use calendar strings without timezone conversion, and generated reflections remain transient component state to avoid schema changes.
+- Future letters become "delivered" by comparing deliver_at with the clock (no job flips a status); email_* columns are reserved for a future server-side sender and are never written by the browser.
