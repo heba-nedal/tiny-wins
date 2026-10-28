@@ -81,7 +81,8 @@ describe("WinGarden stats", () => {
       win("d4", "learning", "Practiced a chord"),
       win("e5", "learning", "Reviewed notes"),
     ]);
-
+    expect(screen.queryByText("Total wins")).toBeNull();
+    expect(screen.queryByText("Categories")).toBeNull();
   });
 });
 
