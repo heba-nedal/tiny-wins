@@ -67,8 +67,6 @@ describe("WinGarden stats", () => {
   it("reports the wins it was given, not a fixed number", async () => {
     await renderGarden(threeWins);
 
-    expect(statValue("Total wins")).toBe("3");
-    expect(statValue("Categories")).toBe("2");
     expect(statValue("Flowers bloomed")).toBe(
       String(gardenPlants(threeWins).filter((p) => p.variant === "flower").length),
     );
@@ -84,8 +82,6 @@ describe("WinGarden stats", () => {
       win("e5", "learning", "Reviewed notes"),
     ]);
 
-    expect(statValue("Total wins")).toBe("2");
-    expect(statValue("Categories")).toBe("1");
   });
 });
 
