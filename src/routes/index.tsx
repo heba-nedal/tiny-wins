@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Brand, StepsIllustration } from "@/components/brand";
+import { Brand } from "@/components/brand";
+import { GrowthStaircase } from "@/components/growth-staircase";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -29,7 +30,7 @@ function Index() {
           <p className="max-w-md text-lg text-muted-foreground">Every little achievement deserves a place. Tiny Wins is a quiet gallery for the things you did today.</p>
           <Button asChild size="lg"><Link to="/dashboard">Start your gallery</Link></Button>
         </div>
-        <StepsIllustration className="w-full" />
+        <GrowthStaircase />
       </main>
     </div>
   );
