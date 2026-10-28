@@ -40,7 +40,7 @@ export function MonthlyReflectionCard() {
 
   const reflection = result?.status === "success" ? result.reflection : null;
   return (
-    <div className="mt-5 rounded-2xl border bg-card p-5 shadow-soft sm:p-6" aria-labelledby="monthly-reflection-title">
+    <div className="mt-8 rounded-2xl border bg-card p-5 shadow-soft sm:p-6 md:mt-10" aria-labelledby="monthly-reflection-title">
       <div className="flex items-center gap-2">
         <CalendarHeart className="h-5 w-5 shrink-0 text-primary" aria-hidden />
         <h3 id="monthly-reflection-title" className="text-xl font-semibold">Your Month in Wins</h3>
