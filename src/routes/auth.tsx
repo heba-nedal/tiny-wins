@@ -2,7 +2,8 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { Brand, StepsIllustration } from "@/components/brand";
+import { Brand } from "@/components/brand";
+import { GrowthStaircase } from "@/components/growth-staircase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -51,7 +52,7 @@ function AuthPage() {
     <div className="grid min-h-screen md:grid-cols-2">
       <div className="hidden flex-col justify-between bg-sand/40 p-12 md:flex">
         <Link to="/"><Brand /></Link>
-        <StepsIllustration className="w-full max-w-md" />
+        <GrowthStaircase />
         <p className="font-display text-2xl text-heading">Every little achievement deserves a place.</p>
       </div>
       <div className="flex items-center justify-center p-6">

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { categoryMeta, formatDate, groupWinsByMonth, type Win } from "@/lib/wins";
 import { MonthlyReflectionCard } from "./monthly-reflection";
+import { ProgressSummary } from "./progress-story";
 
 export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
   wins: Win[];
@@ -19,6 +20,7 @@ export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
         <h2 id="growth-story-title" className="text-2xl font-semibold">My Growth Story</h2>
       </div>
       <p className="mt-1 text-muted-foreground">Every small win is part of a bigger story.</p>
+      {!isLoading && !error && <ProgressSummary wins={wins} />}
       <MonthlyReflectionCard />
       <div className="mt-5">
         {isLoading ? (

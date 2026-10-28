@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Flower2, Palette, Plus } from "lucide-react";
+import { Flower2, Images, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import winGardenIllustration from "@/assets/win-garden.png";
 import { gardenStats } from "@/lib/garden";
@@ -9,7 +9,7 @@ export function WinGarden({ wins, onAdd }: { wins: Win[]; onAdd: () => void }) {
   const stats = gardenStats(wins);
 
   return (
-    <section className="border-y py-6" aria-labelledby="win-garden-title">
+    <section className="border-b py-6 pt-0" aria-labelledby="win-garden-title">
       <div className="flex items-center gap-2">
         <Flower2 className="h-5 w-5 text-heading" strokeWidth={1.6} />
         <h2 id="win-garden-title" className="text-2xl font-semibold">Win Garden</h2>
@@ -26,8 +26,6 @@ export function WinGarden({ wins, onAdd }: { wins: Win[]; onAdd: () => void }) {
       ) : (
         <>
           <dl className="mt-5 grid grid-cols-3 gap-4">
-            <div><dt className="text-sm text-muted-foreground">Total wins</dt><dd className="mt-1 font-display text-2xl text-heading">{stats.total}</dd></div>
-            <div><dt className="text-sm text-muted-foreground">Categories</dt><dd className="mt-1 font-display text-2xl text-heading">{stats.categories}</dd></div>
             <div><dt className="text-sm text-muted-foreground">Flowers bloomed</dt><dd className="mt-1 font-display text-2xl text-heading">{stats.flowers}</dd></div>
           </dl>
 
@@ -41,7 +39,7 @@ export function WinGarden({ wins, onAdd }: { wins: Win[]; onAdd: () => void }) {
 
           <div className="flex justify-end pt-3">
             <Button variant="outline" asChild>
-              <Link to="/gallery"><Palette className="h-4 w-4" /> See all wins</Link>
+              <Link to="/gallery"><Images className="h-4 w-4" /> See all wins</Link>
             </Button>
           </div>
         </>
