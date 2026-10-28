@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Plus, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { StepsIllustration } from "@/components/brand";
+import { GrowthStaircase } from "@/components/growth-staircase";
 import { WinCard } from "@/components/win-card";
 import { WinFormDialog } from "@/components/win-form-dialog";
 import { WinsState } from "@/components/wins-state";
@@ -10,7 +10,6 @@ import { GrowthStory } from "@/components/growth-story";
 import { WinGarden } from "@/components/win-garden";
 import { useWins } from "@/hooks/use-wins";
 import { countThisMonth } from "@/lib/wins";
-import { ProgressStory } from "@/components/progress-story";
 import { LettersCard } from "@/components/letters-card";
 import { LetterFormDialog } from "@/components/letter-form-dialog";
 
@@ -46,10 +45,8 @@ function Dashboard() {
             <div><dt className="text-sm text-muted-foreground">This month</dt><dd className="font-display text-3xl text-heading">{isLoading || error ? "–" : countThisMonth(wins)}</dd></div>
           </dl>
         </div>
-        <StepsIllustration className="mx-auto w-full max-w-sm" />
+        <GrowthStaircase className="mx-auto" />
       </section>
-
-      {!isLoading && !error && <ProgressStory wins={wins} />}
 
       <GrowthStory wins={wins} isLoading={isLoading} error={error} onRetry={() => refetch()} onAdd={() => setAdding(true)} />
       <WinGarden wins={wins} onAdd={() => setAdding(true)} />
