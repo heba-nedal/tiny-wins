@@ -36,7 +36,8 @@ function Layout() {
             <Link to="/dashboard" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.dashboard")}</Link>
             <Link to="/gallery" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.gallery")}</Link>
             <Link to="/letters" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.letters")}</Link>
-            <LanguageSwitcher className="text-muted-foreground hover:text-heading" />
+            <span className="mx-2 hidden h-5 w-px bg-border sm:block" aria-hidden />
+            <LanguageSwitcher className="me-1" />
             <Button variant="ghost" size="sm" onClick={signOut} aria-label={t("nav.signOut")}><LogOut className="rtl:-scale-x-100" /> <span className="hidden sm:inline">{t("nav.signOut")}</span></Button>
           </nav>
         </div>

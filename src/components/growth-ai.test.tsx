@@ -13,12 +13,15 @@ describe("explicit AI interactions", () => {
   it("does not generate on mount or month selection, and clears old results", async () => {
     mocks.monthly.mockResolvedValue({ status: "success", reflection: { month: "2026-09", count: 1, review: "September review", patterns: "Limited data", celebratedTitle: "Learning module", celebration: "Completed", nextStep: "Apply a concept" } });
     render(<MonthlyReflectionCard />);
-    fireEvent.change(screen.getByLabelText("Month"), { target: { value: "2026-09" } });
+    const year = new Date().getFullYear();
+    fireEvent.click(screen.getByRole("button", { name: "Choose month" }));
+    fireEvent.click(await screen.findByRole("button", { name: "September" }));
     expect(mocks.monthly).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Generate My Monthly Reflection" }));
     await screen.findByText("September review");
-    expect(mocks.monthly).toHaveBeenCalledWith({ data: { month: "2026-09", language: "en" } });
-    fireEvent.change(screen.getByLabelText("Month"), { target: { value: "2026-10" } });
+    expect(mocks.monthly).toHaveBeenCalledWith({ data: { month: `${year}-09`, language: "en" } });
+    fireEvent.click(screen.getByRole("button", { name: "Choose month" }));
+    fireEvent.click(await screen.findByRole("button", { name: "October" }));
     expect(screen.queryByText("September review")).toBeNull();
     expect(mocks.monthly).toHaveBeenCalledTimes(1);
   });

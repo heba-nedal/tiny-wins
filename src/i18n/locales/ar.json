@@ -6,7 +6,8 @@
     "gallery": { "title": "المعرض · Tiny Wins", "description": "كل إنجاز صغير سجّلته، في مكان واحد." },
     "letters": { "title": "رسائل إلى نفسي · Tiny Wins", "description": "رسائل مختومة إلى نفسك في المستقبل، تُفتح حين يحين موعدها." }
   },
-  "language": { "switchLabel": "التبديل إلى الإنجليزية" },
+  "language": { "switchLabel": "التبديل إلى الإنجليزية", "label": "اللغة" },
+  "monthPicker": { "choose": "اختيار الشهر", "prevYear": "السنة السابقة", "nextYear": "السنة التالية" },
   "nav": { "dashboard": "الرئيسية", "gallery": "المعرض", "letters": "الرسائل", "signOut": "تسجيل الخروج" },
   "common": { "tryAgain": "إعادة المحاولة", "cancel": "إلغاء", "keepIt": "إبقاء", "delete": "حذف", "edit": "تعديل", "optional": "(اختياري)", "addWin": "إضافة إنجاز", "recordFirstWin": "تسجيل أول إنجاز", "close": "إغلاق" },
   "landing": {
