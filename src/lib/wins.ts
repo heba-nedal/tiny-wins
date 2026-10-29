@@ -1,5 +1,7 @@
 import { BookOpen, Sprout, Briefcase, HeartPulse, Sun, type LucideIcon } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
+import i18n from "@/i18n";
+import { formatDate as formatLocaleDate } from "@/lib/format-date";
 
 export type Category = Database["public"]["Enums"]["win_category"];
 export type Win = Database["public"]["Tables"]["achievements"]["Row"];
@@ -12,7 +14,15 @@ export const CATEGORIES: { value: Category; label: string; icon: LucideIcon; ton
   { value: "everyday", label: "Everyday Wins", icon: Sun, tone: "bg-lavender" },
 ];
 
-export const categoryMeta = (c: Category) => CATEGORIES.find((x) => x.value === c) ?? { value: "everyday" as const, label: "Everyday Wins", icon: Sun, tone: "bg-lavender" };
+/** Display-only label; the stored category value never changes. */
+export const categoryLabel = (c: Category) => i18n.t(`categories.${c}`, { defaultValue: categoryMetaRaw(c).label });
+
+const categoryMetaRaw = (c: Category) => CATEGORIES.find((x) => x.value === c) ?? { value: "everyday" as const, label: "Everyday Wins", icon: Sun, tone: "bg-lavender" };
+
+export const categoryMeta = (c: Category) => {
+  const m = categoryMetaRaw(c);
+  return { ...m, label: categoryLabel(m.value) };
+};
 
 export const TITLE_MAX = 100;
 export const DESC_MAX = 500;
@@ -22,11 +32,11 @@ export type WinInput = { title: string; description: string; category: Category 
 export function validateWin(v: WinInput): Partial<Record<keyof WinInput, string>> {
   const e: Partial<Record<keyof WinInput, string>> = {};
   const t = v.title.trim();
-  if (!t) e.title = "Please give your win a title.";
-  else if (t.length > TITLE_MAX) e.title = `Keep the title under ${TITLE_MAX} characters.`;
-  if (v.description.length > DESC_MAX) e.description = `Keep the description under ${DESC_MAX} characters.`;
-  if (!v.category) e.category = "Choose a category.";
-  if (!v.achievement_date) e.achievement_date = "Pick the date of your win.";
+  if (!t) e.title = i18n.t("wins.validation.titleRequired");
+  else if (t.length > TITLE_MAX) e.title = i18n.t("wins.validation.titleMax", { max: TITLE_MAX });
+  if (v.description.length > DESC_MAX) e.description = i18n.t("wins.validation.descriptionMax", { max: DESC_MAX });
+  if (!v.category) e.category = i18n.t("wins.validation.category");
+  if (!v.achievement_date) e.achievement_date = i18n.t("wins.validation.date");
   return e;
 }
 
@@ -54,7 +64,7 @@ export function progressStory(wins: Pick<Win, "achievement_date" | "category">[]
 export type WinMonthGroup = { key: string; label: string; wins: Win[] };
 
 const monthLabel = (key: string) =>
-  new Date(`${key}-01T00:00:00`).toLocaleDateString(undefined, { year: "numeric", month: "long" });
+  formatLocaleDate(`${key}-01T00:00:00`, { year: "numeric", month: "long" });
 
 export function groupWinsByMonth(wins: Win[]): WinMonthGroup[] {
   const sorted = [...wins].sort(
@@ -71,4 +81,4 @@ export function groupWinsByMonth(wins: Win[]): WinMonthGroup[] {
 }
 
 export const formatDate = (d: string) =>
-  new Date(d + "T00:00:00").toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+  formatLocaleDate(d + "T00:00:00", { year: "numeric", month: "long", day: "numeric" });
