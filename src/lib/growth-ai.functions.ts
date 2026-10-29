@@ -4,7 +4,7 @@ import { monthInput, winInput, type AiResult, type MonthlyReflection, type WinRe
 
 export const getMonthlyReflection = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { month: string }) => monthInput.parse(data))
+  .inputValidator((data: { month: string; lang?: "en" | "ar" }) => monthInput.parse(data))
   .handler(async ({ data, context }): Promise<AiResult<MonthlyReflection>> => {
     const { reflectMonth } = await import("./growth-data.server");
     const { generateMonthly, GrowthAiError } = await import("./growth-ai.server");
@@ -14,7 +14,7 @@ export const getMonthlyReflection = createServerFn({ method: "POST" })
 
 export const getWinReflection = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { id: string }) => winInput.parse(data))
+  .inputValidator((data: { id: string; lang?: "en" | "ar" }) => winInput.parse(data))
   .handler(async ({ data, context }): Promise<AiResult<WinReflection>> => {
     const { reflectWin } = await import("./growth-data.server");
     const { generateGrow, GrowthAiError } = await import("./growth-ai.server");
