@@ -88,7 +88,7 @@ function LettersPage() {
             {delivered.length === 0 ? <Empty text={t("letters.empty")} /> : (
               <div className="grid gap-4 md:grid-cols-2">
                 {delivered.map((l) => (
-                  <button key={l.id} onClick={() => setReading(l)} className="space-y-1 rounded-2xl border bg-card/70 p-5 text-left transition-colors hover:border-primary">
+                  <button key={l.id} onClick={() => setReading(l)} className="space-y-1 rounded-2xl border bg-card/70 p-5 text-start transition-colors hover:border-primary">
                     <h3 dir="auto" className="flex items-center gap-2 text-lg font-semibold"><MailOpen className="h-4 w-4 text-primary" />{l.title ?? t("letters.untitled")}</h3>
                     <p className="text-sm text-muted-foreground">{t("letters.opened", { date: formatDelivery(l.deliver_at) })}{t(l.email_status === "sent" ? "letters.emailed" : "letters.notEmailed")}</p>
                   </button>

@@ -57,7 +57,7 @@ export function WinFormDialog({ open, onOpenChange, win }: { open: boolean; onOp
           <div className="space-y-1.5">
             <Label htmlFor="description">{t("wins.form.descriptionLabel")} <span className="text-muted-foreground">{t("common.optional")}</span></Label>
             <Textarea id="description" rows={3} maxLength={DESC_MAX} value={v.description} onChange={(e) => setV({ ...v, description: e.target.value })} />
-            <p className="text-right text-xs text-muted-foreground">{v.description.length}/{DESC_MAX}</p>
+            <p className="text-end text-xs text-muted-foreground">{v.description.length}/{DESC_MAX}</p>
             {errors.description && <p className="text-sm text-destructive">{errors.description}</p>}
           </div>
           <div className="grid gap-4 sm:grid-cols-2">

@@ -60,7 +60,7 @@ function AuthPage() {
         <p className="font-display text-2xl text-heading">{t("auth.tagline")}</p>
       </div>
       <div className="relative flex items-center justify-center p-6">
-        <LanguageSwitcher className="absolute right-4 top-4" />
+        <LanguageSwitcher className="absolute end-4 top-4" />
         <div className="w-full max-w-sm space-y-6">
           <div className="md:hidden"><Brand /></div>
           {sent ? (

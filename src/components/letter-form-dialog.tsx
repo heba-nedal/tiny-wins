@@ -59,7 +59,7 @@ export function LetterFormDialog({ open, onOpenChange }: { open: boolean; onOpen
           <div className="space-y-1.5">
             <Label htmlFor="letter-message">{t("letters.form.messageLabel")}</Label>
             <Textarea id="letter-message" dir="auto" rows={7} maxLength={LETTER_MESSAGE_MAX} value={v.message} onChange={(e) => setV({ ...v, message: e.target.value })} aria-invalid={!!errors.message} placeholder={t("letters.form.messagePlaceholder")} />
-            <p className="text-right text-xs text-muted-foreground">{v.message.length}/{LETTER_MESSAGE_MAX}</p>
+            <p className="text-end text-xs text-muted-foreground">{v.message.length}/{LETTER_MESSAGE_MAX}</p>
             {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
           </div>
           <div className="space-y-1.5">

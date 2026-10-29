@@ -35,7 +35,7 @@ export function WinCard({ win }: { win: Win }) {
       <Button
         variant="ghost"
         onClick={() => setOpen(true)}
-        className="group flex h-full min-h-44 w-full items-stretch justify-start flex-col gap-3 whitespace-normal rounded-2xl border bg-card p-5 text-left shadow-soft transition-colors hover:border-primary/50 hover:bg-card focus-visible:outline-2 focus-visible:outline-ring"
+        className="group flex h-full min-h-44 w-full items-stretch justify-start flex-col gap-3 whitespace-normal rounded-2xl border bg-card p-5 text-start shadow-soft transition-colors hover:border-primary/50 hover:bg-card focus-visible:outline-2 focus-visible:outline-ring"
       >
         <div className="flex items-center justify-between gap-3">
           <CategoryIcon win={win} />

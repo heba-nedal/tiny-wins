@@ -42,7 +42,7 @@ export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
           </div>
         ) : (
           <div className="relative">
-            <span className="absolute bottom-2 left-[7px] top-2 w-px bg-border" aria-hidden />
+            <span className="absolute bottom-2 start-[7px] top-2 w-px bg-border" aria-hidden />
             <div className="space-y-8">
               {groups.map((group) => (
                 <section key={group.key} aria-label={group.label}>
@@ -51,8 +51,8 @@ export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
                     {group.wins.map((win) => {
                       const m = categoryMeta(win.category);
                       return (
-                        <li key={win.id} className="relative pl-8">
-                          <span className="absolute left-0 top-5 h-3.5 w-3.5 rounded-full border-2 border-primary bg-background" aria-hidden />
+                        <li key={win.id} className="relative ps-8">
+                          <span className="absolute start-0 top-5 h-3.5 w-3.5 rounded-full border-2 border-primary bg-background" aria-hidden />
                           <div className="rounded-2xl border bg-card p-4 shadow-soft">
                             <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                               <h4 dir="auto" className="font-semibold leading-snug">{win.title}</h4>
