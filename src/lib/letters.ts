@@ -1,3 +1,6 @@
+import i18n from "@/i18n";
+import { formatDate } from "@/lib/format-date";
+
 export const LETTER_TITLE_MAX = 120;
 export const LETTER_MESSAGE_MAX = 5000;
 export const MIN_LEAD_MS = 2 * 60 * 1000;
@@ -31,13 +34,13 @@ export function parseLocal(value: string): Date | null {
 
 export function validateLetter(v: LetterInput, now: Date = new Date()): LetterErrors {
   const e: LetterErrors = {};
-  if (v.title.trim().length > LETTER_TITLE_MAX) e.title = `Keep the title under ${LETTER_TITLE_MAX} characters.`;
+  if (v.title.trim().length > LETTER_TITLE_MAX) e.title = i18n.t("letters.validation.titleMax", { max: LETTER_TITLE_MAX });
   const msg = v.message.trim();
-  if (!msg) e.message = "Write a message to your future self.";
-  else if (msg.length > LETTER_MESSAGE_MAX) e.message = `Keep the message under ${LETTER_MESSAGE_MAX} characters.`;
+  if (!msg) e.message = i18n.t("letters.validation.messageRequired");
+  else if (msg.length > LETTER_MESSAGE_MAX) e.message = i18n.t("letters.validation.messageMax", { max: LETTER_MESSAGE_MAX });
   const when = parseLocal(v.deliverLocal);
-  if (!when) e.deliverLocal = "Choose a delivery date and time.";
-  else if (when.getTime() - now.getTime() < MIN_LEAD_MS) e.deliverLocal = "Choose a time at least a few minutes in the future.";
+  if (!when) e.deliverLocal = i18n.t("letters.validation.whenRequired");
+  else if (when.getTime() - now.getTime() < MIN_LEAD_MS) e.deliverLocal = i18n.t("letters.validation.whenSoon");
   return e;
 }
 
@@ -57,7 +60,7 @@ export function countdown(target: string, now: number) {
   return { days, hours, minutes, seconds: s - minutes * 60 };
 }
 
-export const userTimezone = () => Intl.DateTimeFormat().resolvedOptions().timeZone || "your local time";
+export const userTimezone = () => Intl.DateTimeFormat().resolvedOptions().timeZone || i18n.t("letters.form.localTime");
 
 export const formatDelivery = (iso: string) =>
-  new Date(iso).toLocaleString(undefined, { dateStyle: "full", timeStyle: "short" });
+  formatDate(iso, { dateStyle: "full", timeStyle: "short" });

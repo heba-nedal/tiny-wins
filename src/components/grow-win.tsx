@@ -7,6 +7,7 @@ import type { AiResult, WinReflection } from "@/lib/growth-ai";
 import { ReflectionSections } from "./ai-reflection-sections";
 
 export function GrowWin({ id }: { id: string }) {
+  const { t } = useTranslation();
   const [result, setResult] = useState<AiResult<WinReflection> | null>(null);
   const [loading, setLoading] = useState(false);
   const locked = useRef(false);
@@ -20,7 +21,7 @@ export function GrowWin({ id }: { id: string }) {
       const response = await generate({ data: { id } });
       if (mounted.current) setResult(response);
     } catch {
-      if (mounted.current) setResult({ status: "error", message: "We couldn't request insights for this win. Check your connection and sign-in, then try again." });
+      if (mounted.current) setResult({ status: "error", message: t("wins.grow.requestError") });
     } finally {
       locked.current = false;
       if (mounted.current) setLoading(false);
@@ -31,16 +32,16 @@ export function GrowWin({ id }: { id: string }) {
     <div className="border-t pt-4" aria-busy={loading}>
       <Button variant="secondary" className="h-auto min-h-9 whitespace-normal" onClick={request} disabled={loading}>
         {loading ? <LoaderCircle className="animate-spin motion-reduce:animate-none" /> : <Sparkles />}
-        {loading ? "Growing your win…" : reflection ? "Reflect Again" : result?.status === "error" ? "Try Grow This Win Again" : "Grow This Win ✨"}
+        {loading ? t("wins.grow.loading") : reflection ? t("wins.grow.again") : result?.status === "error" ? t("wins.grow.retry") : t("wins.grow.button")}
       </Button>
       <div className="mt-4" aria-live="polite">
-        {loading && <p role="status" className="text-sm text-muted-foreground">Reflecting on this achievement and one small next step…</p>}
+        {loading && <p role="status" className="text-sm text-muted-foreground">{t("wins.grow.loadingStatus")}</p>}
         {result && result.status !== "success" && <p role={result.status === "error" ? "alert" : "status"} className={result.status === "error" ? "text-sm text-destructive" : "text-sm text-muted-foreground"}>{result.message}</p>}
         {reflection && <ReflectionSections sections={[
-          { heading: "What This Win Shows", text: reflection.shows },
-          { heading: "Build on This Win", text: reflection.buildOn },
-          { heading: "Your Next Small Step", text: reflection.nextStep },
-          { heading: "Why This Step Fits", text: reflection.why },
+          { heading: t("wins.grow.shows"), text: reflection.shows },
+          { heading: t("wins.grow.buildOn"), text: reflection.buildOn },
+          { heading: t("wins.grow.nextStep"), text: reflection.nextStep },
+          { heading: t("wins.grow.why"), text: reflection.why },
         ]} />}
       </div>
     </div>

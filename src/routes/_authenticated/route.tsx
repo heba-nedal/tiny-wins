@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 import { createFileRoute, Link, Outlet, redirect, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Brand } from "@/components/brand";
 import { Button } from "@/components/ui/button";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -15,6 +17,7 @@ export const Route = createFileRoute("/_authenticated")({
 });
 
 function Layout() {
+  const { t } = useTranslation();
   const qc = useQueryClient();
   const navigate = useNavigate();
   const signOut = async () => {
@@ -30,10 +33,11 @@ function Layout() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-4">
           <Link to="/dashboard"><Brand /></Link>
           <nav className="flex items-center gap-1">
-            <Link to="/dashboard" className={nav} activeProps={{ className: "bg-sage text-heading" }}>Dashboard</Link>
-            <Link to="/gallery" className={nav} activeProps={{ className: "bg-sage text-heading" }}>Gallery</Link>
-            <Link to="/letters" className={nav} activeProps={{ className: "bg-sage text-heading" }}>Letters</Link>
-            <Button variant="ghost" size="sm" onClick={signOut} aria-label="Sign out"><LogOut /> <span className="hidden sm:inline">Sign out</span></Button>
+            <Link to="/dashboard" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.dashboard")}</Link>
+            <Link to="/gallery" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.gallery")}</Link>
+            <Link to="/letters" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.letters")}</Link>
+            <LanguageSwitcher className="text-muted-foreground hover:text-heading" />
+            <Button variant="ghost" size="sm" onClick={signOut} aria-label={t("nav.signOut")}><LogOut /> <span className="hidden sm:inline">{t("nav.signOut")}</span></Button>
           </nav>
         </div>
       </header>
