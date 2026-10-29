@@ -10,7 +10,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       size="sm"
       className={className}
       lang={isAr ? "en" : "ar"}
-      aria-label={isAr ? "Switch language to English" : t("language.switchLabel")}
+      aria-label={t("language.switchLabel")}
       onClick={() => void i18n.changeLanguage(isAr ? "en" : "ar")}
     >
       {isAr ? "English" : "العربية"}

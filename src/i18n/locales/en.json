@@ -8,7 +8,7 @@
   },
   "language": { "switchLabel": "Switch language to Arabic" },
   "nav": { "dashboard": "Dashboard", "gallery": "Gallery", "letters": "Letters", "signOut": "Sign out" },
-  "common": { "tryAgain": "Try again", "cancel": "Cancel", "keepIt": "Keep it", "delete": "Delete", "edit": "Edit", "optional": "(optional)", "addWin": "Add a Win", "recordFirstWin": "Record your first win" },
+  "common": { "tryAgain": "Try again", "cancel": "Cancel", "keepIt": "Keep it", "delete": "Delete", "edit": "Edit", "optional": "(optional)", "addWin": "Add a Win", "recordFirstWin": "Record your first win", "close": "Close" },
   "landing": {
     "signIn": "Sign in",
     "hero": { "title1": "Small steps.", "title2": "Real progress.", "subtitle": "Every little achievement deserves a place. Tiny Wins is a quiet gallery for the things you did today.", "cta": "Start your gallery" }
