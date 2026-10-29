@@ -8,7 +8,7 @@
   },
   "language": { "switchLabel": "التبديل إلى الإنجليزية" },
   "nav": { "dashboard": "الرئيسية", "gallery": "المعرض", "letters": "الرسائل", "signOut": "تسجيل الخروج" },
-  "common": { "tryAgain": "إعادة المحاولة", "cancel": "إلغاء", "keepIt": "إبقاء", "delete": "حذف", "edit": "تعديل", "optional": "(اختياري)", "addWin": "إضافة إنجاز", "recordFirstWin": "تسجيل أول إنجاز" },
+  "common": { "tryAgain": "إعادة المحاولة", "cancel": "إلغاء", "keepIt": "إبقاء", "delete": "حذف", "edit": "تعديل", "optional": "(اختياري)", "addWin": "إضافة إنجاز", "recordFirstWin": "تسجيل أول إنجاز", "close": "إغلاق" },
   "landing": {
     "signIn": "تسجيل الدخول",
     "hero": { "title1": "خطوات صغيرة.", "title2": "تقدّم حقيقي.", "subtitle": "كل إنجاز صغير يستحق مكاناً. Tiny Wins معرض هادئ لما أنجزته اليوم.", "cta": "هنا يبدأ معرضك" }
