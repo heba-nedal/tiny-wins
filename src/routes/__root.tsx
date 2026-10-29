@@ -132,10 +132,16 @@ function RootComponent() {
   useEffect(() => {
     const onChange = () => { applyLanguage(currentLanguage()); void router.invalidate(); };
     i18n.on("languageChanged", onChange);
-    const initial = detectLanguage();
-    if (initial !== currentLanguage()) void i18n.changeLanguage(initial);
-    else onChange();
-    return () => i18n.off("languageChanged", onChange);
+    let cancelled = false;
+    // Switch only after the first client render settles in English, avoiding a hydration mismatch.
+    const apply = () => {
+      if (cancelled) return;
+      const initial = detectLanguage();
+      if (initial !== currentLanguage()) void i18n.changeLanguage(initial);
+      else applyLanguage(initial);
+    };
+    const timer = setTimeout(apply, 300);
+    return () => { cancelled = true; clearTimeout(timer); i18n.off("languageChanged", onChange); };
   }, [router]);
 
   return (

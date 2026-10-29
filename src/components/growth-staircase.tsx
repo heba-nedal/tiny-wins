@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import growthStaircase from "@/assets/growth-staircase-transparent.png.asset.json";
 
 export function GrowthStaircase({ className = "" }: { className?: string }) {
