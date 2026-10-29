@@ -8,7 +8,7 @@ import type { AiResult, WinReflection } from "@/lib/growth-ai";
 import { ReflectionSections } from "./ai-reflection-sections";
 
 export function GrowWin({ id }: { id: string }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [result, setResult] = useState<AiResult<WinReflection> | null>(null);
   const [loading, setLoading] = useState(false);
   const locked = useRef(false);
@@ -19,7 +19,7 @@ export function GrowWin({ id }: { id: string }) {
     if (locked.current) return;
     locked.current = true; setLoading(true); setResult(null);
     try {
-      const response = await generate({ data: { id } });
+      const response = await generate({ data: { id, lang: i18n.language === "ar" ? "ar" : "en" } });
       if (mounted.current) setResult(response);
     } catch {
       if (mounted.current) setResult({ status: "error", message: t("wins.grow.requestError") });
