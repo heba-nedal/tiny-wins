@@ -132,10 +132,17 @@ function RootComponent() {
   useEffect(() => {
     const onChange = () => { applyLanguage(currentLanguage()); void router.invalidate(); };
     i18n.on("languageChanged", onChange);
-    const initial = detectLanguage();
-    if (initial !== currentLanguage()) void i18n.changeLanguage(initial);
-    else onChange();
-    return () => i18n.off("languageChanged", onChange);
+    let cancelled = false;
+    // Switch only after lazy route chunks have hydrated in English, avoiding a hydration mismatch.
+    void Promise.all(router.state.matches.map((m) => router.loadRouteChunk(router.looseRoutesById[m.routeId]!)))
+      .catch(() => undefined)
+      .then(() => setTimeout(() => {
+        if (cancelled) return;
+        const initial = detectLanguage();
+        if (initial !== currentLanguage()) void i18n.changeLanguage(initial);
+        else applyLanguage(initial);
+      }, 0));
+    return () => { cancelled = true; i18n.off("languageChanged", onChange); };
   }, [router]);
 
   return (
