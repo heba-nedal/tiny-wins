@@ -11,3 +11,4 @@
 - [ ] Add owned goals with duplicate-safe save and CRUD (inspect existing schema first).
 - [x] Letters to Myself (in-app phase): card, page, future_letters with RLS, countdowns, cancel before delivery.
 - [ ] Letters email delivery (blocked: needs a verified sender domain owned by the user).
+- [x] Bilingual Phase 1: i18n setup, language switcher, English strings extracted (Arabic translations and RTL polish are later phases).

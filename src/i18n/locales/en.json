@@ -6,7 +6,7 @@
     "gallery": { "title": "Gallery · Tiny Wins", "description": "Browse every small win you've recorded." },
     "letters": { "title": "Letters to Myself · Tiny Wins", "description": "Write sealed letters to your future self and open them when the day arrives." }
   },
-  "language": { "switchTo": "العربية", "switchLabel": "Switch language to Arabic" },
+  "language": { "switchLabel": "Switch language to Arabic" },
   "nav": { "dashboard": "Dashboard", "gallery": "Gallery", "letters": "Letters", "signOut": "Sign out" },
   "common": { "tryAgain": "Try again", "cancel": "Cancel", "keepIt": "Keep it", "delete": "Delete", "edit": "Edit", "optional": "(optional)", "addWin": "Add a Win", "recordFirstWin": "Record your first win" },
   "landing": {
