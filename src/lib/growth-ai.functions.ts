@@ -4,20 +4,24 @@ import { monthInput, winInput, type AiResult, type MonthlyReflection, type WinRe
 
 export const getMonthlyReflection = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { month: string; lang?: "en" | "ar" }) => monthInput.parse(data))
+  .inputValidator((data: { month: string; language?: "en" | "ar" }) => monthInput.parse(data))
   .handler(async ({ data, context }): Promise<AiResult<MonthlyReflection>> => {
     const { reflectMonth } = await import("./growth-data.server");
     const { generateMonthly, GrowthAiError } = await import("./growth-ai.server");
-    try { return await reflectMonth(context.supabase, context.userId, data.month, (wins, month) => generateMonthly(wins, month, data.lang)); }
-    catch (error) { return { status: "error", message: error instanceof GrowthAiError ? error.message : "We couldn't read your wins right now. Please try again." }; }
+    try { return await reflectMonth(context.supabase, context.userId, data.month, (wins, month) => generateMonthly(wins, month, data.language)); }
+    catch (error) {
+      if (!(error instanceof GrowthAiError)) console.error("Reflection failed", error instanceof Error ? error.message : "unknown");
+      return { status: "error", code: error instanceof GrowthAiError ? error.code : "generic" }; }
   });
 
 export const getWinReflection = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { id: string; lang?: "en" | "ar" }) => winInput.parse(data))
+  .inputValidator((data: { id: string; language?: "en" | "ar" }) => winInput.parse(data))
   .handler(async ({ data, context }): Promise<AiResult<WinReflection>> => {
     const { reflectWin } = await import("./growth-data.server");
     const { generateGrow, GrowthAiError } = await import("./growth-ai.server");
-    try { return await reflectWin(context.supabase, context.userId, data.id, (win) => generateGrow(win, data.lang)); }
-    catch (error) { return { status: "error", message: error instanceof GrowthAiError ? error.message : "We couldn't read this win right now. Please try again." }; }
+    try { return await reflectWin(context.supabase, context.userId, data.id, (win) => generateGrow(win, data.language)); }
+    catch (error) {
+      if (!(error instanceof GrowthAiError)) console.error("Reflection failed", error instanceof Error ? error.message : "unknown");
+      return { status: "error", code: error instanceof GrowthAiError ? error.code : "generic" }; }
   });

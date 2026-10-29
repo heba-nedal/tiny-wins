@@ -35,13 +35,24 @@ describe("reflection validation", () => {
   });
 });
 describe("AI output language", () => {
-  it("adds the Arabic rules only for Arabic and keeps English prompt unchanged", async () => {
-    const { buildInstructions, arabicMonthLabel } = await import("./growth-ai.server");
+  it("assembles BASE + language rule + feature instructions", async () => {
+    const { buildInstructions, monthLabel } = await import("./growth-ai.server");
     const ar = buildInstructions("X", "ar");
+    const en = buildInstructions("X", "en");
     expect(ar).toContain("Modern Standard Arabic");
-    expect(ar).toContain("الشهر القادم");
-    expect(ar).not.toContain("language most represented");
-    expect(buildInstructions("X", "en")).toContain("Write in the language most represented in the achievement titles (Arabic for predominantly Arabic titles, otherwise English). Keep each");
-    expect(arabicMonthLabel("2026-10")).toMatch(/2026/);
+    expect(ar.endsWith("'الشهر القادم' for the following month. X")).toBe(true);
+    expect(en.endsWith("say 'next month' for the following month. X")).toBe(true);
+    expect(en).toContain("Never infer or assume the user's gender, age, religion, nationality or background from their wording.");
+    expect(en).not.toContain("language most represented");
+    expect(monthLabel("2026-10", "en")).toBe("October 2026");
+    expect(monthLabel("2026-10", "ar")).toContain("2026");
+  });
+  it("accepts only en or ar, defaulting to en", async () => {
+    const { monthInput, winInput, aiCodeKey } = await import("./growth-ai");
+    expect(monthInput.parse({ month: "2026-10" }).language).toBe("en");
+    expect(monthInput.safeParse({ month: "2026-10", language: "fr" }).success).toBe(false);
+    expect(winInput.safeParse({ id: "00000000-0000-4000-8000-000000000000", language: "ar" }).success).toBe(true);
+    expect(aiCodeKey("rate_limited")).toBe("ai.errors.rateLimited");
+    expect(aiCodeKey("weird")).toBe("ai.errors.generic");
   });
 });
