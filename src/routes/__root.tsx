@@ -133,16 +133,15 @@ function RootComponent() {
     const onChange = () => { applyLanguage(currentLanguage()); void router.invalidate(); };
     i18n.on("languageChanged", onChange);
     let cancelled = false;
-    // Switch only after lazy route chunks have hydrated in English, avoiding a hydration mismatch.
-    void Promise.all(router.state.matches.map((m) => router.loadRouteChunk((router.routesById as Record<string, Parameters<typeof router.loadRouteChunk>[0]>)[m.routeId]!)))
-      .catch(() => undefined)
-      .then(() => setTimeout(() => {
-        if (cancelled) return;
-        const initial = detectLanguage();
-        if (initial !== currentLanguage()) void i18n.changeLanguage(initial);
-        else applyLanguage(initial);
-      }, 0));
-    return () => { cancelled = true; i18n.off("languageChanged", onChange); };
+    // Switch only after the first client render settles in English, avoiding a hydration mismatch.
+    const apply = () => {
+      if (cancelled) return;
+      const initial = detectLanguage();
+      if (initial !== currentLanguage()) void i18n.changeLanguage(initial);
+      else applyLanguage(initial);
+    };
+    const timer = setTimeout(apply, 300);
+    return () => { cancelled = true; clearTimeout(timer); i18n.off("languageChanged", onChange); };
   }, [router]);
 
   return (
