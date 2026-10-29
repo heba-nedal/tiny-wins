@@ -30,7 +30,7 @@ export function LettersCard({ onWrite }: { onWrite: () => void }) {
       <div className="mt-4 text-sm text-muted-foreground">
         {isLoading ? t("dashboard.lettersCard.loading") : error ? t("dashboard.lettersCard.error") : next ? (
           <div className="space-y-2">
-            <p>{next.title ? <Trans i18nKey="dashboard.lettersCard.nextTitled" values={{ title: next.title }} components={{ 1: <span dir="auto" className="text-heading" /> }} /> : t("dashboard.lettersCard.next")}</p>
+            <p>{next.title ? <Trans i18nKey="dashboard.lettersCard.nextTitled" values={{ title: next.title }} components={{ 1: <bdi className="text-heading" /> }} /> : t("dashboard.lettersCard.next")}</p>
             <LetterCountdown target={next.deliver_at} now={now} />
           </div>
         ) : t("dashboard.lettersCard.none")}

@@ -53,19 +53,19 @@ export function LetterFormDialog({ open, onOpenChange }: { open: boolean; onOpen
         <form onSubmit={submit} className="space-y-4" noValidate>
           <div className="space-y-1.5">
             <Label htmlFor="letter-title">{t("letters.form.titleLabel")} <span className="text-muted-foreground">{t("common.optional")}</span></Label>
-            <Input id="letter-title" dir="auto" maxLength={LETTER_TITLE_MAX} value={v.title} onChange={(e) => setV({ ...v, title: e.target.value })} aria-invalid={!!errors.title} />
+            <Input id="letter-title" dir={v.title ? "auto" : undefined} maxLength={LETTER_TITLE_MAX} value={v.title} onChange={(e) => setV({ ...v, title: e.target.value })} aria-invalid={!!errors.title} />
             {errors.title && <p className="text-sm text-destructive">{errors.title}</p>}
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="letter-message">{t("letters.form.messageLabel")}</Label>
-            <Textarea id="letter-message" dir="auto" rows={7} maxLength={LETTER_MESSAGE_MAX} value={v.message} onChange={(e) => setV({ ...v, message: e.target.value })} aria-invalid={!!errors.message} placeholder={t("letters.form.messagePlaceholder")} />
+            <Textarea id="letter-message" dir={v.message ? "auto" : undefined} rows={7} maxLength={LETTER_MESSAGE_MAX} value={v.message} onChange={(e) => setV({ ...v, message: e.target.value })} aria-invalid={!!errors.message} placeholder={t("letters.form.messagePlaceholder")} />
             <p className="text-end text-xs text-muted-foreground">{v.message.length}/{LETTER_MESSAGE_MAX}</p>
             {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="letter-when">{t("letters.form.whenLabel")}</Label>
             <Input id="letter-when" type="datetime-local" min={minLocal} value={v.deliverLocal} onChange={(e) => setV({ ...v, deliverLocal: e.target.value })} aria-invalid={!!errors.deliverLocal} />
-            <p className="text-xs text-muted-foreground">{t("letters.form.timezone")} <span className="text-heading">{tz}</span></p>
+            <p className="text-xs text-muted-foreground">{t("letters.form.timezone")} <bdi className="text-heading">{tz}</bdi></p>
             {errors.deliverLocal && <p className="text-sm text-destructive">{errors.deliverLocal}</p>}
           </div>
           <p className="rounded-lg bg-sage/50 p-3 text-sm text-muted-foreground">

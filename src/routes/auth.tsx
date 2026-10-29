@@ -66,7 +66,7 @@ function AuthPage() {
           {sent ? (
             <div className="space-y-3 rounded-2xl border bg-card p-6 shadow-soft">
               <h1 className="text-2xl font-semibold">{t("auth.checkEmail.title")}</h1>
-              <p className="text-muted-foreground">{t("auth.checkEmail.body", { email })}</p>
+              <p className="text-muted-foreground">{t("auth.checkEmail.body", { email: "\u2068" + email + "\u2069" })}</p>
               <Button variant="outline" onClick={() => { setSent(false); setMode("in"); }}>{t("auth.checkEmail.back")}</Button>
             </div>
           ) : (
@@ -78,11 +78,11 @@ function AuthPage() {
               <form onSubmit={submit} className="space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="email">{t("auth.email")}</Label>
-                  <Input id="email" type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <Input id="email" dir="ltr" type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="password">{t("auth.password")}</Label>
-                  <Input id="password" type="password" required minLength={6} autoComplete={mode === "in" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <Input id="password" dir="ltr" type="password" required minLength={6} autoComplete={mode === "in" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <Button type="submit" className="w-full" disabled={busy}>{busy ? t("auth.wait") : t(mode === "in" ? "auth.signIn.submit" : "auth.signUp.submit")}</Button>
               </form>

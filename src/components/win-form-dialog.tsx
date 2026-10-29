@@ -51,12 +51,12 @@ export function WinFormDialog({ open, onOpenChange, win }: { open: boolean; onOp
         <form onSubmit={submit} className="space-y-4" noValidate>
           <div className="space-y-1.5">
             <Label htmlFor="title">{t("wins.form.titleLabel")}</Label>
-            <Input id="title" maxLength={TITLE_MAX} value={v.title} onChange={(e) => setV({ ...v, title: e.target.value })} aria-invalid={!!errors.title} />
+            <Input id="title" dir={v.title ? "auto" : undefined} maxLength={TITLE_MAX} value={v.title} onChange={(e) => setV({ ...v, title: e.target.value })} aria-invalid={!!errors.title} />
             {errors.title && <p className="text-sm text-destructive">{errors.title}</p>}
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="description">{t("wins.form.descriptionLabel")} <span className="text-muted-foreground">{t("common.optional")}</span></Label>
-            <Textarea id="description" rows={3} maxLength={DESC_MAX} value={v.description} onChange={(e) => setV({ ...v, description: e.target.value })} />
+            <Textarea id="description" dir={v.description ? "auto" : undefined} rows={3} maxLength={DESC_MAX} value={v.description} onChange={(e) => setV({ ...v, description: e.target.value })} />
             <p className="text-end text-xs text-muted-foreground">{v.description.length}/{DESC_MAX}</p>
             {errors.description && <p className="text-sm text-destructive">{errors.description}</p>}
           </div>
