@@ -59,7 +59,7 @@ function Dashboard() {
       <section className="space-y-5">
         <div className="flex items-end justify-between">
           <h2 className="text-2xl font-semibold">{t("dashboard.recent.title")}</h2>
-          {wins.length > 0 && <Link to="/gallery" className="flex items-center gap-1 text-sm text-primary hover:underline">{t("dashboard.recent.viewAll")} <ArrowRight className="h-4 w-4" /></Link>}
+          {wins.length > 0 && <Link to="/gallery" className="flex items-center gap-1 text-sm text-primary hover:underline">{t("dashboard.recent.viewAll")} <ArrowRight className="h-4 w-4 rtl:-scale-x-100" /></Link>}
         </div>
         <WinsState isLoading={isLoading} error={error} empty={wins.length === 0} onAdd={() => setAdding(true)}>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

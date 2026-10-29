@@ -35,14 +35,14 @@ export function WinCard({ win }: { win: Win }) {
       <Button
         variant="ghost"
         onClick={() => setOpen(true)}
-        className="group flex h-full min-h-44 w-full items-stretch justify-start flex-col gap-3 whitespace-normal rounded-2xl border bg-card p-5 text-left shadow-soft transition-colors hover:border-primary/50 hover:bg-card focus-visible:outline-2 focus-visible:outline-ring"
+        className="group flex h-full min-h-44 w-full items-stretch justify-start flex-col gap-3 whitespace-normal rounded-2xl border bg-card p-5 text-start shadow-soft transition-colors hover:border-primary/50 hover:bg-card focus-visible:outline-2 focus-visible:outline-ring"
       >
         <div className="flex items-center justify-between gap-3">
           <CategoryIcon win={win} />
           <span className="text-xs text-muted-foreground">{formatDate(win.achievement_date)}</span>
         </div>
-        <h3 className="break-words text-lg font-semibold leading-snug group-hover:text-heading">{win.title}</h3>
-        {win.description && <p className="line-clamp-2 text-sm text-muted-foreground">{win.description}</p>}
+        <h3 dir="auto" className="break-words text-start text-lg font-semibold leading-snug group-hover:text-heading">{win.title}</h3>
+        {win.description && <p dir="auto" className="line-clamp-2 text-start text-sm text-muted-foreground">{win.description}</p>}
         <span className={`mt-auto self-start rounded-full px-2.5 py-1 text-xs font-medium text-heading ${m.tone}`}>{m.label}</span>
       </Button>
 
@@ -72,7 +72,7 @@ export function WinCard({ win }: { win: Win }) {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>{t("wins.deleteTitle")}</AlertDialogTitle>
-            <AlertDialogDescription>{t("wins.deleteBody", { title: win.title })}</AlertDialogDescription>
+            <AlertDialogDescription>{t("wins.deleteBody", { title: "\u2068" + win.title + "\u2069" })}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>{t("common.keepIt")}</AlertDialogCancel>
