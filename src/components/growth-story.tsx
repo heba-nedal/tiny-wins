@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Plus, RefreshCw, Sprout } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { categoryMeta, formatDate, progressStory, type Win } from "@/lib/wins";
 
 export function ProgressSummary({ wins }: { wins: Win[] }) {

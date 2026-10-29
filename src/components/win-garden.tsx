@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
 import { Flower2, Images, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
