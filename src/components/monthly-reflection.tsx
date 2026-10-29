@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { CalendarHeart, LoaderCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { MonthPicker } from "./month-picker";
 import { getMonthlyReflection } from "@/lib/growth-ai.functions";
 import { currentMonth, monthBounds, type AiResult, type MonthlyReflection } from "@/lib/growth-ai";
 import { aiCodeKey } from "@/lib/growth-ai";
@@ -53,7 +53,7 @@ export function MonthlyReflectionCard() {
       <div className="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-end">
         <div className="w-full sm:w-44">
           <label htmlFor="reflection-month" className="mb-1.5 block text-sm font-medium">{t("dashboard.month.label")}</label>
-          <Input id="reflection-month" type="month" value={month} min="0001-01" max="9998-12" disabled={loading} onChange={(event) => { selected.current = event.target.value; setMonth(event.target.value); setResult(null); }} />
+          <MonthPicker id="reflection-month" value={month} min="0001-01" max="9998-12" disabled={loading} onChange={(value) => { selected.current = value; setMonth(value); setResult(null); }} />
         </div>
         <Button className="h-auto min-h-9 w-full whitespace-normal text-center sm:w-auto" disabled={loading || !month} onClick={request}>
           {loading ? <LoaderCircle className="animate-spin motion-reduce:animate-none" /> : <Sparkles />}
