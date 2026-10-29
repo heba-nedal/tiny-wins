@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -13,6 +14,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 const toLocalInput = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 
 export function LetterFormDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
+  const { t } = useTranslation();
   const [v, setV] = useState<LetterInput>(empty);
   const [errors, setErrors] = useState<LetterErrors>({});
   const [tz, setTz] = useState("");
@@ -35,8 +37,8 @@ export function LetterFormDialog({ open, onOpenChange }: { open: boolean; onOpen
     create.mutate(
       { title: v.title.trim() || null, message: v.message.trim(), deliver_at: when.toISOString(), timezone: tz },
       {
-        onSuccess: (row) => { toast.success(`Letter sealed. It opens here on ${formatDelivery(row.deliver_at)}.`); onOpenChange(false); },
-        onError: (err) => toast.error(err.message.includes("future") ? "Delivery time must be in the future." : `Couldn't save your letter: ${err.message}`),
+        onSuccess: (row) => { toast.success(t("letters.form.sealed", { date: formatDelivery(row.deliver_at) })); onOpenChange(false); },
+        onError: (err) => toast.error(err.message.includes("future") ? t("letters.form.futureError") : t("letters.form.saveError", { message: err.message })),
       },
     );
   };
@@ -45,33 +47,33 @@ export function LetterFormDialog({ open, onOpenChange }: { open: boolean; onOpen
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle className="font-display text-2xl text-heading">A letter to my future self</DialogTitle>
-          <DialogDescription>Write it today. Open it when the moment arrives.</DialogDescription>
+          <DialogTitle className="font-display text-2xl text-heading">{t("letters.form.title")}</DialogTitle>
+          <DialogDescription>{t("letters.form.description")}</DialogDescription>
         </DialogHeader>
         <form onSubmit={submit} className="space-y-4" noValidate>
           <div className="space-y-1.5">
-            <Label htmlFor="letter-title">Title <span className="text-muted-foreground">(optional)</span></Label>
+            <Label htmlFor="letter-title">{t("letters.form.titleLabel")} <span className="text-muted-foreground">{t("common.optional")}</span></Label>
             <Input id="letter-title" dir="auto" maxLength={LETTER_TITLE_MAX} value={v.title} onChange={(e) => setV({ ...v, title: e.target.value })} aria-invalid={!!errors.title} />
             {errors.title && <p className="text-sm text-destructive">{errors.title}</p>}
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="letter-message">Message</Label>
-            <Textarea id="letter-message" dir="auto" rows={7} maxLength={LETTER_MESSAGE_MAX} value={v.message} onChange={(e) => setV({ ...v, message: e.target.value })} aria-invalid={!!errors.message} placeholder="Dear future me…" />
+            <Label htmlFor="letter-message">{t("letters.form.messageLabel")}</Label>
+            <Textarea id="letter-message" dir="auto" rows={7} maxLength={LETTER_MESSAGE_MAX} value={v.message} onChange={(e) => setV({ ...v, message: e.target.value })} aria-invalid={!!errors.message} placeholder={t("letters.form.messagePlaceholder")} />
             <p className="text-right text-xs text-muted-foreground">{v.message.length}/{LETTER_MESSAGE_MAX}</p>
             {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="letter-when">Open on</Label>
+            <Label htmlFor="letter-when">{t("letters.form.whenLabel")}</Label>
             <Input id="letter-when" type="datetime-local" min={minLocal} value={v.deliverLocal} onChange={(e) => setV({ ...v, deliverLocal: e.target.value })} aria-invalid={!!errors.deliverLocal} />
-            <p className="text-xs text-muted-foreground">Time zone: <span className="text-heading">{tz}</span></p>
+            <p className="text-xs text-muted-foreground">{t("letters.form.timezone")} <span className="text-heading">{tz}</span></p>
             {errors.deliverLocal && <p className="text-sm text-destructive">{errors.deliverLocal}</p>}
           </div>
           <p className="rounded-lg bg-sage/50 p-3 text-sm text-muted-foreground">
-            Your letter will open here in Tiny Wins at that time. Email delivery isn't switched on yet, so no email will be sent for now.
+            {t("letters.form.notice")}
           </p>
           <div className="flex justify-end gap-2 pt-2">
-            <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>Cancel</Button>
-            <Button type="submit" disabled={create.isPending}>{create.isPending ? "Sealing…" : "Seal letter"}</Button>
+            <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>{t("common.cancel")}</Button>
+            <Button type="submit" disabled={create.isPending}>{create.isPending ? t("letters.form.sealing") : t("letters.form.seal")}</Button>
           </div>
         </form>
       </DialogContent>

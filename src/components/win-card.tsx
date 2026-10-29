@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Pencil, Trash2 } from "lucide-react";
@@ -22,6 +23,7 @@ export function CategoryIcon({ win }: { win: Win }) {
 }
 
 export function WinCard({ win }: { win: Win }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState(false);
   const [confirm, setConfirm] = useState(false);
@@ -53,13 +55,13 @@ export function WinCard({ win }: { win: Win }) {
             </div>
             <DialogTitle dir="auto" className="break-words font-display text-2xl text-heading">{win.title}</DialogTitle>
             <DialogDescription dir="auto" className="whitespace-pre-wrap pt-2 text-base text-foreground">
-              {win.description || "No description added."}
+              {win.description || t("wins.noDescription")}
             </DialogDescription>
           </DialogHeader>
           <GrowWin key={`${win.id}:${win.title}:${win.description}:${win.category}:${win.achievement_date}`} id={win.id} />
           <div className="flex justify-end gap-2 pt-4">
-            <Button variant="ghost" onClick={() => setConfirm(true)}><Trash2 /> Delete</Button>
-            <Button variant="outline" onClick={() => { setOpen(false); setEditing(true); }}><Pencil /> Edit</Button>
+            <Button variant="ghost" onClick={() => setConfirm(true)}><Trash2 /> {t("common.delete")}</Button>
+            <Button variant="outline" onClick={() => { setOpen(false); setEditing(true); }}><Pencil /> {t("common.edit")}</Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -69,21 +71,21 @@ export function WinCard({ win }: { win: Win }) {
       <AlertDialog open={confirm} onOpenChange={setConfirm}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete this win?</AlertDialogTitle>
-            <AlertDialogDescription>“{win.title}” will be removed permanently.</AlertDialogDescription>
+            <AlertDialogTitle>{t("wins.deleteTitle")}</AlertDialogTitle>
+            <AlertDialogDescription>{t("wins.deleteBody", { title: win.title })}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Keep it</AlertDialogCancel>
+            <AlertDialogCancel>{t("common.keepIt")}</AlertDialogCancel>
             <AlertDialogAction
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
               onClick={() =>
                 del.mutate(win.id, {
-                  onSuccess: () => { toast.success("Win deleted."); setOpen(false); },
-                  onError: (e) => toast.error(`Couldn't delete: ${e.message}`),
+                  onSuccess: () => { toast.success(t("wins.deleted")); setOpen(false); },
+                  onError: (e) => toast.error(t("wins.deleteError", { message: e.message })),
                 })
               }
             >
-              Delete
+              {t("common.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

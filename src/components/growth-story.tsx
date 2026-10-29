@@ -12,14 +12,15 @@ export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
   onRetry: () => void;
   onAdd: () => void;
 }) {
+  const { t } = useTranslation();
   const groups = groupWinsByMonth(wins);
   return (
     <section className="border-y py-6" aria-labelledby="growth-story-title">
       <div className="flex items-center gap-2">
         <Sprout className="h-5 w-5 text-heading" strokeWidth={1.6} />
-        <h2 id="growth-story-title" className="text-2xl font-semibold">My Growth Story</h2>
+        <h2 id="growth-story-title" className="text-2xl font-semibold">{t("dashboard.growth.title")}</h2>
       </div>
-      <p className="mt-1 text-muted-foreground">Every small win is part of a bigger story.</p>
+      <p className="mt-1 text-muted-foreground">{t("dashboard.growth.subtitle")}</p>
       {!isLoading && !error && <ProgressSummary wins={wins} />}
       <MonthlyReflectionCard />
       <div className="mt-5">
@@ -29,14 +30,14 @@ export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
           </div>
         ) : error ? (
           <div className="flex flex-col items-start gap-3 rounded-2xl border border-destructive/30 bg-card p-6">
-            <p className="text-destructive">We couldn't load your story right now.</p>
-            <Button variant="outline" onClick={onRetry}><RefreshCw /> Try again</Button>
+            <p className="text-destructive">{t("dashboard.growth.loadError")}</p>
+            <Button variant="outline" onClick={onRetry}><RefreshCw /> {t("common.tryAgain")}</Button>
           </div>
         ) : groups.length === 0 ? (
           <div className="flex flex-col items-center gap-4 rounded-2xl border border-dashed bg-card/60 p-10 text-center">
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-sage text-heading"><Sprout strokeWidth={1.6} /></span>
-            <h3 className="text-xl font-semibold">Your story starts with your first little win.</h3>
-            <Button onClick={onAdd}><Plus /> Record your first win</Button>
+            <h3 className="text-xl font-semibold">{t("dashboard.growth.empty")}</h3>
+            <Button onClick={onAdd}><Plus /> {t("common.recordFirstWin")}</Button>
           </div>
         ) : (
           <div className="relative">
