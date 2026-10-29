@@ -168,5 +168,6 @@
     }
   },
   "notFound": { "title": "Page not found", "body": "The page you're looking for doesn't exist or has been moved.", "home": "Go home" },
-  "error": { "title": "This page didn't load", "body": "Something went wrong on our end. You can try refreshing or head back home." }
+  "error": { "title": "This page didn't load", "body": "Something went wrong on our end. You can try refreshing or head back home." },
+  "errors": {"generic": "Something went wrong. Please try again.", "auth": {"invalidCredentials": "Incorrect email or password.", "emailNotConfirmed": "Your email isn't confirmed yet. Please open the confirmation link we sent you.", "alreadyRegistered": "An account with this email already exists.", "rateLimit": "Too many attempts. Please wait a moment and try again."}}
 }

@@ -3,6 +3,7 @@ import i18n from "@/i18n";
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
+import { authErrorMessage } from "@/lib/auth-errors";
 import { supabase } from "@/integrations/supabase/client";
 import { Brand } from "@/components/brand";
 import { GrowthStaircase } from "@/components/growth-staircase";
@@ -41,12 +42,12 @@ function AuthPage() {
     if (mode === "in") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setBusy(false);
-      if (error) { toast.error(error.message); return; }
+      if (error) { toast.error(authErrorMessage(error, t)); return; }
       navigate({ to: "/dashboard" });
     } else {
       const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/dashboard" } });
       setBusy(false);
-      if (error) { toast.error(error.message); return; }
+      if (error) { toast.error(authErrorMessage(error, t)); return; }
       if (data.session) navigate({ to: "/dashboard" });
       else setSent(true);
     }
