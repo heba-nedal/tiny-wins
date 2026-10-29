@@ -17,10 +17,12 @@ export function currentMonth(now = new Date()) {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
 }
 
-export const monthInput = z.object({ month: z.string() }).strict().superRefine(({ month }, ctx) => {
+export const aiLanguage = z.enum(["en", "ar"]).optional();
+export type AiLanguage = "en" | "ar";
+export const monthInput = z.object({ month: z.string(), lang: aiLanguage }).strict().superRefine(({ month }, ctx) => {
   try { monthBounds(month); } catch { ctx.addIssue({ code: "custom", message: "Choose a valid month." }); }
 });
-export const winInput = z.object({ id: z.string().uuid() }).strict();
+export const winInput = z.object({ id: z.string().uuid(), lang: aiLanguage }).strict();
 
 export const monthlySchema = z.strictObject({
   review: z.string(), patterns: z.string(), celebratedWinId: z.string(), celebration: z.string(), nextStep: z.string(),

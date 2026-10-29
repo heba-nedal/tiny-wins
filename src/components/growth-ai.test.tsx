@@ -17,7 +17,7 @@ describe("explicit AI interactions", () => {
     expect(mocks.monthly).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Generate My Monthly Reflection" }));
     await screen.findByText("September review");
-    expect(mocks.monthly).toHaveBeenCalledWith({ data: { month: "2026-09" } });
+    expect(mocks.monthly).toHaveBeenCalledWith({ data: { month: "2026-09", lang: "en" } });
     fireEvent.change(screen.getByLabelText("Month"), { target: { value: "2026-10" } });
     expect(screen.queryByText("September review")).toBeNull();
     expect(mocks.monthly).toHaveBeenCalledTimes(1);
@@ -38,7 +38,7 @@ describe("explicit AI interactions", () => {
     expect(mocks.win).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Grow This Win ✨" }));
     await screen.findByText("Practice for 10 minutes");
-    expect(mocks.win).toHaveBeenCalledWith({ data: { id: "selected-id" } });
+    expect(mocks.win).toHaveBeenCalledWith({ data: { id: "selected-id", lang: "en" } });
   });
   it("blocks concurrent per-win requests and supports explicit error recovery", async () => {
     let resolve: (value: unknown) => void = () => {};

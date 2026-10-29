@@ -10,7 +10,7 @@ import { formatDate } from "@/lib/format-date";
 import { ReflectionSections } from "./ai-reflection-sections";
 
 export function MonthlyReflectionCard() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [month, setMonth] = useState("");
   const [result, setResult] = useState<AiResult<MonthlyReflection> | null>(null);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ export function MonthlyReflectionCard() {
     const requested = month;
     locked.current = true; setLoading(true); setResult(null);
     try {
-      const response = await generate({ data: { month: requested } });
+      const response = await generate({ data: { month: requested, lang: i18n.language === "ar" ? "ar" : "en" } });
       if (mounted.current && selected.current === requested) setResult(response);
     } catch {
       if (mounted.current && selected.current === requested) setResult({ status: "error", message: t("dashboard.month.requestError") });
