@@ -134,7 +134,7 @@ function RootComponent() {
     i18n.on("languageChanged", onChange);
     let cancelled = false;
     // Switch only after lazy route chunks have hydrated in English, avoiding a hydration mismatch.
-    void Promise.all(router.state.matches.map((m) => router.loadRouteChunk(router.looseRoutesById[m.routeId]!)))
+    void Promise.all(router.state.matches.map((m) => router.loadRouteChunk((router.routesById as Record<string, Parameters<typeof router.loadRouteChunk>[0]>)[m.routeId]!)))
       .catch(() => undefined)
       .then(() => setTimeout(() => {
         if (cancelled) return;
