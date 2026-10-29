@@ -34,3 +34,14 @@ describe("reflection validation", () => {
     expect(() => validateMonthly({ ...output, celebratedWinId: "other" }, [{ id: "owned", title: "Module completed" }], "2026-10")).toThrow();
   });
 });
+describe("AI output language", () => {
+  it("adds the Arabic rules only for Arabic and keeps English prompt unchanged", async () => {
+    const { buildInstructions, arabicMonthLabel } = await import("./growth-ai.server");
+    const ar = buildInstructions("X", "ar");
+    expect(ar).toContain("Modern Standard Arabic");
+    expect(ar).toContain("الشهر القادم");
+    expect(ar).not.toContain("language most represented");
+    expect(buildInstructions("X", "en")).toContain("Write in the language most represented in the achievement titles (Arabic for predominantly Arabic titles, otherwise English). Keep each");
+    expect(arabicMonthLabel("2026-10")).toMatch(/2026/);
+  });
+});
