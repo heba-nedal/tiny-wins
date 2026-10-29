@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "landing": { "title": "Tiny Wins — Small steps. Real progress.", "description": "A calm personal gallery for recognizing and celebrating your small accomplishments." },
+    "auth": { "title": "Sign in · Tiny Wins", "description": "Sign in or create your Tiny Wins account." },
+    "dashboard": { "title": "Dashboard · Tiny Wins", "description": "Your recent small wins and progress at a glance." },
+    "gallery": { "title": "Gallery · Tiny Wins", "description": "Browse every small win you've recorded." },
+    "letters": { "title": "Letters to Myself · Tiny Wins", "description": "Write sealed letters to your future self and open them when the day arrives." }
+  },
+  "language": { "switchTo": "العربية", "switchLabel": "Switch language to Arabic" },
+  "nav": { "dashboard": "Dashboard", "gallery": "Gallery", "letters": "Letters", "signOut": "Sign out" },
+  "common": { "tryAgain": "Try again", "cancel": "Cancel", "keepIt": "Keep it", "delete": "Delete", "edit": "Edit", "optional": "(optional)", "addWin": "Add a Win", "recordFirstWin": "Record your first win" },
+  "landing": {
+    "signIn": "Sign in",
+    "hero": { "title1": "Small steps.", "title2": "Real progress.", "subtitle": "Every little achievement deserves a place. Tiny Wins is a quiet gallery for the things you did today.", "cta": "Start your gallery" }
+  },
+  "illustration": { "staircaseAlt": "Watercolor illustration of stairs with growing plants and a star", "gardenAlt": "Illustration of a garden path with flat stepping stones, rounded stones, sage shrubs, lavender stalks and peach daisies." },
+  "auth": {
+    "tagline": "Every little achievement deserves a place.",
+    "checkEmail": { "title": "Check your email", "body": "We sent a confirmation link to {{email}}. Open it to finish signing up.", "back": "Back to sign in" },
+    "signIn": { "title": "Welcome back", "subtitle": "Sign in to see your wins.", "submit": "Sign in", "switchPrompt": "New here?", "switchAction": "Create an account" },
+    "signUp": { "title": "Create your account", "subtitle": "Start celebrating the small stuff.", "submit": "Sign up", "switchPrompt": "Already have an account?", "switchAction": "Sign in" },
+    "email": "Email",
+    "password": "Password",
+    "wait": "Please wait…",
+    "passwordShort": "Password must be at least 6 characters."
+  },
+  "dashboard": {
+    "hero": { "title1": "Small steps.", "title2": "Real progress.", "subtitle": "Every little achievement deserves a place.", "totalWins": "Total wins", "thisMonth": "This month" },
+    "growth": {
+      "title": "My Growth Story",
+      "subtitle": "Every small win is part of a bigger story.",
+      "summary": "Since {{date}}, you’ve recorded {{wins}} across {{categories}}.",
+      "wins_one": "{{count}} win",
+      "wins_other": "{{count}} wins",
+      "categories_one": "{{count}} category",
+      "categories_other": "{{count}} categories",
+      "leading": "{{category}} is your most celebrated area so far.",
+      "activeMonths": "Months with wins",
+      "loadError": "We couldn't load your story right now.",
+      "empty": "Your story starts with your first little win."
+    },
+    "month": {
+      "title": "Your Month in Wins",
+      "subtitle": "Reflect on the little wins that made this month yours.",
+      "label": "Month",
+      "generate": "Generate My Monthly Reflection",
+      "again": "Generate Another Reflection",
+      "loading": "Reflecting on your wins…",
+      "loadingStatus": "Gathering the little wins from your selected month…",
+      "invalid": "Please choose a valid month.",
+      "requestError": "We couldn't request your reflection. Check your connection and sign-in, then try again.",
+      "header": "{{month}} · {{wins}}",
+      "review": "Your Month in Review",
+      "patterns": "Patterns You Built",
+      "celebrate": "A Win Worth Celebrating",
+      "nextStep": "One Small Step for Next Month"
+    },
+    "garden": {
+      "title": "Win Garden",
+      "subtitle": "Every little win helps something grow.",
+      "emptyTitle": "Your garden is waiting to grow",
+      "emptyBody": "Every win you record plants something new here.",
+      "flowers": "Flowers bloomed",
+      "seeAll": "See all wins"
+    },
+    "lettersCard": {
+      "title": "A Letter to My Future Self",
+      "subtitle": "Some words are meant to be read later.",
+      "myLetters": "My letters",
+      "loading": "Checking your letters…",
+      "error": "Couldn't load your letters right now.",
+      "next": "Your next letter opens in:",
+      "nextTitled": "Your next letter — <1>{{title}}</1> opens in:",
+      "none": "No letters waiting yet."
+    },
+    "recent": { "title": "Recent Wins", "viewAll": "View all" }
+  },
+  "gallery": { "title": "Your gallery", "subtitle": "Newest first.", "filterLabel": "Filter by category", "all": "All", "emptyCategory": "No wins in this category yet." },
+  "wins": {
+    "loadError": "We couldn't load your wins: {{message}}",
+    "emptyTitle": "Your first win is waiting",
+    "emptyBody": "Finished a chapter? Drank enough water? Wrote that email? Write it down — it counts.",
+    "noDescription": "No description added.",
+    "deleteTitle": "Delete this win?",
+    "deleteBody": "“{{title}}” will be removed permanently.",
+    "deleted": "Win deleted.",
+    "deleteError": "Couldn't delete: {{message}}",
+    "form": {
+      "addTitle": "Add a win",
+      "editTitle": "Edit win",
+      "description": "Big or small, it counts.",
+      "titleLabel": "Title",
+      "descriptionLabel": "Description",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "Choose…",
+      "dateLabel": "Date",
+      "save": "Save win",
+      "saving": "Saving…",
+      "added": "Win added — well done!",
+      "updated": "Win updated.",
+      "saveError": "Couldn't save your win: {{message}}"
+    },
+    "validation": {
+      "titleRequired": "Please give your win a title.",
+      "titleMax": "Keep the title under {{max}} characters.",
+      "descriptionMax": "Keep the description under {{max}} characters.",
+      "category": "Choose a category.",
+      "date": "Pick the date of your win."
+    },
+    "grow": {
+      "button": "Grow This Win ✨",
+      "again": "Reflect Again",
+      "retry": "Try Grow This Win Again",
+      "loading": "Growing your win…",
+      "loadingStatus": "Reflecting on this achievement and one small next step…",
+      "requestError": "We couldn't request insights for this win. Check your connection and sign-in, then try again.",
+      "shows": "What This Win Shows",
+      "buildOn": "Build on This Win",
+      "nextStep": "Your Next Small Step",
+      "why": "Why This Step Fits"
+    }
+  },
+  "categories": { "learning": "Learning", "personal_growth": "Personal Growth", "work_projects": "Work & Projects", "health_habits": "Health & Habits", "everyday": "Everyday Wins" },
+  "letters": {
+    "title": "Letters to Myself",
+    "subtitle": "Write to who you're becoming. Letters open here when their time comes.",
+    "write": "Write a Letter",
+    "loading": "Loading your letters…",
+    "loadError": "Couldn't load your letters.",
+    "upcoming": "Upcoming Letters",
+    "upcomingEmpty": "No sealed letters yet. Write one for a day worth remembering.",
+    "delivered": "Delivered Letters",
+    "empty": "Delivered letters will appear here to read.",
+    "untitled": "Untitled letter",
+    "opens": "Opens {{date}}",
+    "opened": "Opened {{date}} · available in Tiny Wins",
+    "emailed": " · emailed",
+    "notEmailed": " · not emailed",
+    "cancelLabel": "Cancel letter",
+    "cancelled": "Letter cancelled.",
+    "fromPast": "A letter from your past self",
+    "written": "Written {{date}}",
+    "cancelTitle": "Cancel this letter?",
+    "cancelBody": "It will be deleted permanently and won't open on its date.",
+    "countdown": { "label": "Time until this letter opens", "days": "days", "hours": "hours", "min": "min", "sec": "sec", "compact": "{{d}}d {{h}}h {{m}}m {{s}}s" },
+    "form": {
+      "title": "A letter to my future self",
+      "description": "Write it today. Open it when the moment arrives.",
+      "titleLabel": "Title",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Dear future me…",
+      "whenLabel": "Open on",
+      "timezone": "Time zone:",
+      "localTime": "your local time",
+      "notice": "Your letter will open here in Tiny Wins at that time. Email delivery isn't switched on yet, so no email will be sent for now.",
+      "seal": "Seal letter",
+      "sealing": "Sealing…",
+      "sealed": "Letter sealed. It opens here on {{date}}.",
+      "futureError": "Delivery time must be in the future.",
+      "saveError": "Couldn't save your letter: {{message}}"
+    },
+    "validation": {
+      "titleMax": "Keep the title under {{max}} characters.",
+      "messageRequired": "Write a message to your future self.",
+      "messageMax": "Keep the message under {{max}} characters.",
+      "whenRequired": "Choose a delivery date and time.",
+      "whenSoon": "Choose a time at least a few minutes in the future."
+    }
+  },
+  "notFound": { "title": "Page not found", "body": "The page you're looking for doesn't exist or has been moved.", "home": "Go home" },
+  "error": { "title": "This page didn't load", "body": "Something went wrong on our end. You can try refreshing or head back home." }
+}
