@@ -1,5 +1,5 @@
 type T = (key: string) => string;
-type AuthErr = { code?: string; message?: string } | null | undefined;
+type AuthErr = { code?: string | undefined; message?: string | undefined } | null | undefined;
 
 const KEYS: Record<string, string> = {
   invalid_credentials: "errors.auth.invalidCredentials",
@@ -19,7 +19,8 @@ const MESSAGE_MATCHERS: [RegExp, string][] = [
 ];
 
 export function authErrorKey(error: AuthErr): string {
-  if (error?.code && KEYS[error.code]) return KEYS[error.code];
+  const mapped = error?.code ? KEYS[error.code] : undefined;
+  if (mapped) return mapped;
   const msg = error?.message ?? "";
   for (const [re, key] of MESSAGE_MATCHERS) if (re.test(msg)) return key;
   return "errors.generic";
