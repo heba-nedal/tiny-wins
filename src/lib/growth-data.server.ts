@@ -29,12 +29,12 @@ export async function readWin(db: SupabaseClient<Database>, userId: string, id: 
 // Keep the empty/not-owned boundary before the generator so it cannot incur AI usage.
 export async function reflectMonth<T>(db: SupabaseClient<Database>, userId: string, month: string, generate: (wins: GrowthRecord[], month: string) => Promise<T>): Promise<AiResult<T>> {
   const wins = await readMonth(db, userId, month);
-  if (wins.length === 0) return { status: "empty", message: "No wins recorded for this month yet. Every little win counts whenever you're ready." };
+  if (wins.length === 0) return { status: "empty", code: "empty_month" };
   return { status: "success", reflection: await generate(wins, month) };
 }
 
 export async function reflectWin<T>(db: SupabaseClient<Database>, userId: string, id: string, generate: (win: GrowthRecord) => Promise<T>): Promise<AiResult<T>> {
   const win = await readWin(db, userId, id);
-  if (!win) return { status: "empty", message: "This win is no longer available. Choose one of your saved wins." };
+  if (!win) return { status: "empty", code: "empty_win" };
   return { status: "success", reflection: await generate(win) };
 }

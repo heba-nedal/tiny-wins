@@ -1,4 +1,4 @@
-export function ReflectionSections({ sections }: { sections: { heading: string; text: string; title?: string }[] }) {
+export function ReflectionSections({ sections }: { sections: { heading: string; text: string; title?: React.ReactNode }[] }) {
   return (
     <div className="space-y-5" aria-live="polite">
       {sections.map(({ heading, text, title }) => (

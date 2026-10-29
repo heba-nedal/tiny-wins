@@ -17,12 +17,18 @@ export function currentMonth(now = new Date()) {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
 }
 
-export const aiLanguage = z.enum(["en", "ar"]).optional();
+export const aiLanguage = z.enum(["en", "ar"]).default("en");
 export type AiLanguage = "en" | "ar";
-export const monthInput = z.object({ month: z.string(), lang: aiLanguage }).strict().superRefine(({ month }, ctx) => {
+export type AiCode = "empty_month" | "empty_win" | "rate_limited" | "unavailable" | "invalid_output" | "generic";
+const AI_CODE_KEYS: Record<string, string> = {
+  empty_month: "ai.empty.month", empty_win: "ai.empty.win", rate_limited: "ai.errors.rateLimited",
+  unavailable: "ai.errors.unavailable", invalid_output: "ai.errors.invalidOutput",
+};
+export const aiCodeKey = (code?: string) => (code && AI_CODE_KEYS[code]) || "ai.errors.generic";
+export const monthInput = z.object({ month: z.string(), language: aiLanguage }).strict().superRefine(({ month }, ctx) => {
   try { monthBounds(month); } catch { ctx.addIssue({ code: "custom", message: "Choose a valid month." }); }
 });
-export const winInput = z.object({ id: z.string().uuid(), lang: aiLanguage }).strict();
+export const winInput = z.object({ id: z.string().uuid(), language: aiLanguage }).strict();
 
 export const monthlySchema = z.strictObject({
   review: z.string(), patterns: z.string(), celebratedWinId: z.string(), celebration: z.string(), nextStep: z.string(),
@@ -32,7 +38,7 @@ export const growSchema = z.strictObject({
 });
 export type MonthlyReflection = z.infer<typeof monthlySchema> & { celebratedTitle: string; month: string; count: number };
 export type WinReflection = z.infer<typeof growSchema>;
-export type AiResult<T> = { status: "success"; reflection: T } | { status: "empty"; message: string } | { status: "error"; message: string };
+export type AiResult<T> = { status: "success"; reflection: T } | { status: "empty" | "error"; code?: AiCode; message?: string };
 
 export function usableText(value: string) {
   const text = value.trim();
