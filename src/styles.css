@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Fraunces", Georgia, serif;
-  --font-sans: "Figtree", system-ui, sans-serif;
+  --font-display: "Fraunces", "Amiri", Georgia, serif;
+  --font-sans: "Figtree", "Tajawal", system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -76,6 +76,11 @@
   }
   h1, h2, h3 { font-family: var(--font-display); color: var(--color-heading); letter-spacing: 0; }
 }
+
+html[lang="ar"] *, html[lang="ar"] *::before, html[lang="ar"] *::after { letter-spacing: normal !important; }
+html[lang="ar"] body { line-height: 1.8; }
+html[lang="ar"] :is(h1, h2, h3, h4, h5, h6) { line-height: 1.45; }
+html[lang="ar"] :is(button, input, select, textarea, [role="button"], [role="combobox"], .rounded-full) { line-height: normal; }
 
 @media (prefers-reduced-motion: no-preference) {
   .garden-sway {
