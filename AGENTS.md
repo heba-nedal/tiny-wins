@@ -17,3 +17,4 @@
 - Growth AI uses narrowly scoped authenticated RPCs and paginated owner-filtered reads; achievement DATE month boundaries use calendar strings without timezone conversion, and generated reflections remain transient component state to avoid schema changes.
 - Future letters become "delivered" by comparing deliver_at with the clock (no job flips a status); email_* columns are reserved for a future server-side sender and are never written by the browser.
 - UI strings live in `src/i18n/locales/*.json` and render via `t()`; dates go through `src/lib/format-date.ts`; the saved language is applied shortly after first render in `__root.tsx` so SSR/hydration stay English-consistent. Stored values (categories, user text) are never translated.
+- Telegram linking uses the existing tables through a narrow client-side type bridge with RLS; read only linked_at, insert only language, and scope unlink to the current account to preserve database defaults and chat privacy.

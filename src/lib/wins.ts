@@ -4,7 +4,8 @@ import i18n from "@/i18n";
 import { formatDate as formatLocaleDate } from "@/lib/format-date";
 
 export type Category = Database["public"]["Enums"]["win_category"];
-export type Win = Database["public"]["Tables"]["achievements"]["Row"];
+type Achievement = Database["public"]["Tables"]["achievements"]["Row"];
+export type Win = Omit<Achievement, "source" | "is_publishable" | "source_ref"> & Partial<Pick<Achievement, "source" | "is_publishable" | "source_ref">>;
 
 export const CATEGORIES: { value: Category; label: string; icon: LucideIcon; tone: string }[] = [
   { value: "learning", label: "Learning", icon: BookOpen, tone: "bg-lavender" },

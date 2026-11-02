@@ -14,6 +14,7 @@ import { useWins } from "@/hooks/use-wins";
 import { countThisMonth } from "@/lib/wins";
 import { LettersCard } from "@/components/letters-card";
 import { LetterFormDialog } from "@/components/letter-form-dialog";
+import { TelegramLinkCard } from "@/components/telegram-link-card";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
@@ -54,6 +55,7 @@ function Dashboard() {
       <GrowthStory wins={wins} isLoading={isLoading} error={error} onRetry={() => refetch()} onAdd={() => setAdding(true)} />
       <WinGarden wins={wins} onAdd={() => setAdding(true)} />
       <LettersCard onWrite={() => setWriting(true)} />
+      <TelegramLinkCard />
       <LetterFormDialog open={writing} onOpenChange={setWriting} />
 
       <section className="space-y-5">
