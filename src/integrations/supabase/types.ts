@@ -21,6 +21,9 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          is_publishable: boolean
+          source: string
+          source_ref: string | null
           title: string
           user_id: string
         }
@@ -30,6 +33,9 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_publishable?: boolean
+          source?: string
+          source_ref?: string | null
           title: string
           user_id?: string
         }
@@ -39,6 +45,9 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_publishable?: boolean
+          source?: string
+          source_ref?: string | null
           title?: string
           user_id?: string
         }
@@ -92,12 +101,66 @@ export type Database = {
         }
         Relationships: []
       }
+      telegram_link_tokens: {
+        Row: {
+          created_at: string
+          expires_at: string
+          language: string
+          token: string
+          used_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          language?: string
+          token?: string
+          used_at?: string | null
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          language?: string
+          token?: string
+          used_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      telegram_links: {
+        Row: {
+          chat_id: number
+          language: string
+          linked_at: string
+          timezone: string
+          user_id: string
+        }
+        Insert: {
+          chat_id: number
+          language?: string
+          linked_at?: string
+          timezone?: string
+          user_id: string
+        }
+        Update: {
+          chat_id?: number
+          language?: string
+          linked_at?: string
+          timezone?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      link_telegram: {
+        Args: { p_chat_id: number; p_token: string }
+        Returns: Json
+      }
     }
     Enums: {
       win_category:
