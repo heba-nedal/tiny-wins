@@ -13,8 +13,15 @@ import { GrowthStory } from "./growth-story";
 const win: Win = { id: "win-1", user_id: "user-1", title: "Completed a chapter", description: null, category: "learning", achievement_date: "2026-11-03", created_at: "2026-11-03T12:00:00Z", is_publishable: true, source: "telegram" };
 const label = "Okay to use in my weekly LinkedIn draft";
 const badge = "Can be used in your LinkedIn draft";
-afterEach(cleanup);
-beforeEach(() => mocks.save.mockReset());
+afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
+beforeEach(() => {
+  mocks.save.mockReset();
+  vi.stubGlobal("ResizeObserver", class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  });
+});
 
 describe("per-win LinkedIn consent", () => {
   it("defaults off for a new win, including after an enabled edit", () => {
