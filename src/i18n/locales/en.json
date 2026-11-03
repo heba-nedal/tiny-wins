@@ -1,5 +1,6 @@
 {
   "meta": {
+    "assistant": { "title": "Wins Assistant · Tiny Wins", "description": "Ask questions about your saved wins. Answers come only from your own records." },
     "landing": { "title": "Tiny Wins — Small steps. Real progress.", "description": "A calm personal gallery for recognizing and celebrating your small accomplishments." },
     "auth": { "title": "Sign in · Tiny Wins", "description": "Sign in or create your Tiny Wins account." },
     "dashboard": { "title": "Dashboard · Tiny Wins", "description": "Your recent small wins and progress at a glance." },
@@ -8,7 +9,7 @@
   },
   "language": { "switchLabel": "Switch language to Arabic", "label": "Language" },
   "monthPicker": { "choose": "Choose month", "prevYear": "Previous year", "nextYear": "Next year" },
-  "nav": { "dashboard": "Dashboard", "gallery": "Gallery", "letters": "Letters", "signOut": "Sign out" },
+  "nav": { "dashboard": "Dashboard", "gallery": "Gallery", "letters": "Letters", "assistant": "Assistant", "signOut": "Sign out" },
   "common": { "tryAgain": "Try again", "cancel": "Cancel", "keepIt": "Keep it", "delete": "Delete", "edit": "Edit", "optional": "(optional)", "addWin": "Add a Win", "recordFirstWin": "Record your first win", "close": "Close" },
   "landing": {
     "signIn": "Sign in",
@@ -194,5 +195,23 @@
   "unlinked": "Telegram unlinked.",
   "error": "Couldn't create a link. Please try again.",
   "sourceBadge": "Added from Telegram"
-}
+},
+  "assistant": {
+    "title": "Wins Assistant",
+    "subtitle": "Ask about your saved wins. Answers come only from what you've recorded.",
+    "placeholder": "Ask about your wins…",
+    "send": "Ask",
+    "thinking": "Looking through your wins…",
+    "suggestions": {
+      "month": "What were my main wins this month?",
+      "learning": "When was my last win in Learning?",
+      "cv": "Write a short paragraph about my progress for my CV."
+    },
+    "sourcesTitle": "Based on these wins",
+    "disclaimer": "Generated from your saved wins. AI can make mistakes, so please check the wins listed before relying on an answer.",
+    "notFound": "I couldn't find anything in your saved wins that answers this. Try rephrasing, or record more wins.",
+    "emptyWins": "You haven't saved any wins yet. Once you add a few, you can ask questions about them.",
+    "emptyQuestion": "Please type a question.",
+    "counter": "{{count}}/{{max}}"
+  }
 }
