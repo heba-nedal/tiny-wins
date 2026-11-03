@@ -1,5 +1,5 @@
 # Tiny Wins enhancements
-- [ ] Add only the existing-field LinkedIn draft permission switch and date indicators; verify defaults, editing, save payloads, and indicators without schema changes.
+- [x] Add only the existing-field LinkedIn draft permission switch and date indicators; defaults, editing, insert/update payloads, and indicators covered by passing tests; no schema changes. Live signed-in save/readback remains unavailable with external unmanaged Supabase.
 - [x] Add only the Telegram dashboard linking card and Telegram source badges; all five states covered by automated tests; 73 tests passed, build OK, no schema changes.
 - [ ] Live Telegram linking/unlinking and authenticated dashboard visual verification (blocked: external Supabase has no available signed-in testing session).
 - [x] Win Garden: show the user's supplied garden illustration as a local project asset in place of the generated plant SVG; Total wins / Categories / Flowers bloomed stay derived from real achievements; database, auth and other sections untouched.
