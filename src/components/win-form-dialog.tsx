@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CATEGORIES, categoryLabel, DESC_MAX, TITLE_MAX, validateWin, type Category, type Win, type WinInput } from "@/lib/wins";
 import { useSaveWin } from "@/hooks/use-wins";
@@ -16,11 +17,13 @@ export function WinFormDialog({ open, onOpenChange, win }: { open: boolean; onOp
   const { t } = useTranslation();
   const [v, setV] = useState<WinInput>({ title: "", description: "", category: "", achievement_date: today() });
   const [errors, setErrors] = useState<ReturnType<typeof validateWin>>({});
+  const [publishable, setPublishable] = useState(false);
   const save = useSaveWin();
 
   useEffect(() => {
     if (open) {
       setErrors({});
+      setPublishable(win?.is_publishable ?? false);
       setV(win
         ? { title: win.title, description: win.description ?? "", category: win.category, achievement_date: win.achievement_date }
         : { title: "", description: "", category: "", achievement_date: today() });
@@ -33,7 +36,7 @@ export function WinFormDialog({ open, onOpenChange, win }: { open: boolean; onOp
     setErrors(errs);
     if (Object.keys(errs).length) return;
     save.mutate(
-      { id: win?.id, title: v.title.trim(), description: v.description.trim() || null, category: v.category as Category, achievement_date: v.achievement_date },
+      { id: win?.id, title: v.title.trim(), description: v.description.trim() || null, category: v.category as Category, achievement_date: v.achievement_date, is_publishable: publishable },
       {
         onSuccess: () => { toast.success(t(win ? "wins.form.updated" : "wins.form.added")); onOpenChange(false); },
         onError: (err) => toast.error(t("wins.form.saveError", { message: err.message })),
@@ -76,6 +79,13 @@ export function WinFormDialog({ open, onOpenChange, win }: { open: boolean; onOp
               <Input id="date" type="date" value={v.achievement_date} onChange={(e) => setV({ ...v, achievement_date: e.target.value })} />
               {errors.achievement_date && <p className="text-sm text-destructive">{errors.achievement_date}</p>}
             </div>
+          </div>
+          <div className="flex items-start justify-between gap-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="publishable">{t("wins.form.publishable")}</Label>
+              <p id="publishable-hint" className="text-sm text-muted-foreground">{t("wins.form.publishableHint")}</p>
+            </div>
+            <Switch id="publishable" dir="ltr" checked={publishable} onCheckedChange={setPublishable} aria-describedby="publishable-hint" />
           </div>
           <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>{t("common.cancel")}</Button>

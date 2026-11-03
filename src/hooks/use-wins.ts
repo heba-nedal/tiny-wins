@@ -23,7 +23,7 @@ export function useWins() {
   });
 }
 
-type Payload = { title: string; description: string | null; category: Category; achievement_date: string };
+type Payload = { title: string; description: string | null; category: Category; achievement_date: string; is_publishable: boolean };
 
 export function useSaveWin() {
   const qc = useQueryClient();

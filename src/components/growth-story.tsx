@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Plus, RefreshCw, Sprout, Send } from "lucide-react";
+import { Plus, RefreshCw, Sprout, Send, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { categoryMeta, formatDate, groupWinsByMonth, type Win } from "@/lib/wins";
@@ -56,7 +56,7 @@ export function GrowthStory({ wins, isLoading, error, onRetry, onAdd }: {
                           <div className="rounded-2xl border bg-card p-4 shadow-soft">
                             <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                               <h4 dir="auto" className="font-semibold leading-snug">{win.title}</h4>
-                              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">{formatDate(win.achievement_date)}{win.source === "telegram" && <span title={t("telegram.sourceBadge")}><Send className="h-3 w-3 shrink-0" role="img" aria-label={t("telegram.sourceBadge")} /></span>}</span>
+                              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">{formatDate(win.achievement_date)}{win.source === "telegram" && <span title={t("telegram.sourceBadge")}><Send className="h-3 w-3 shrink-0" role="img" aria-label={t("telegram.sourceBadge")} /></span>}{win.is_publishable && <Share2 className="h-3 w-3 shrink-0" role="img" aria-label={t("wins.publishableBadge")}><title>{t("wins.publishableBadge")}</title></Share2>}</span>
                             </div>
                             {win.description && <p dir="auto" className="mt-1 line-clamp-2 text-sm text-muted-foreground">{win.description}</p>}
                             <span className={`mt-2 inline-block rounded-full px-2.5 py-1 text-xs font-medium text-heading ${m.tone}`}>{m.label}</span>

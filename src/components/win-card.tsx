@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Pencil, Trash2, Send } from "lucide-react";
+import { Pencil, Trash2, Send, Share2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
@@ -39,7 +39,7 @@ export function WinCard({ win }: { win: Win }) {
       >
         <div className="flex items-center justify-between gap-3">
           <CategoryIcon win={win} />
-          <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">{formatDate(win.achievement_date)}{win.source === "telegram" && <span title={t("telegram.sourceBadge")}><Send className="h-3 w-3 shrink-0" role="img" aria-label={t("telegram.sourceBadge")} /></span>}</span>
+          <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">{formatDate(win.achievement_date)}{win.source === "telegram" && <span title={t("telegram.sourceBadge")}><Send className="h-3 w-3 shrink-0" role="img" aria-label={t("telegram.sourceBadge")} /></span>}{win.is_publishable && <Share2 className="h-3 w-3 shrink-0" role="img" aria-label={t("wins.publishableBadge")}><title>{t("wins.publishableBadge")}</title></Share2>}</span>
         </div>
         <h3 dir="auto" className="break-words text-start text-lg font-semibold leading-snug group-hover:text-heading">{win.title}</h3>
         {win.description && <p dir="auto" className="line-clamp-2 text-start text-sm text-muted-foreground">{win.description}</p>}

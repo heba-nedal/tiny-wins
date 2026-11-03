@@ -78,6 +78,7 @@
   },
   "gallery": { "title": "Your gallery", "subtitle": "Newest first.", "filterLabel": "Filter by category", "all": "All", "emptyCategory": "No wins in this category yet." },
   "wins": {
+    "publishableBadge": "Can be used in your LinkedIn draft",
     "loadError": "We couldn't load your wins: {{message}}",
     "emptyTitle": "Your first win is waiting",
     "emptyBody": "Finished a chapter? Drank enough water? Wrote that email? Write it down — it counts.",
@@ -95,6 +96,8 @@
       "categoryLabel": "Category",
       "categoryPlaceholder": "Choose…",
       "dateLabel": "Date",
+      "publishable": "Okay to use in my weekly LinkedIn draft",
+      "publishableHint": "Off by default. Only wins you switch on can be used, and nothing is posted without your review.",
       "save": "Save win",
       "saving": "Saving…",
       "added": "Win added — well done!",
