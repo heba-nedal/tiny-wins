@@ -83,7 +83,9 @@ describe("owned data and gateway boundary", () => {
   it("reuses exact language rules and gateway settings with single-turn structured input", async () => {
     mocks.stream.mockResolvedValue((async function* () { yield { type: "response.output_text.done", text: JSON.stringify({ found: true, answer: "Recorded progress.", usedAchievementIds: ["1"] }) }; })());
     await generateAssistant([win("1")], input);
-    const [payload, options] = mocks.stream.mock.calls[0];
+    const call = mocks.stream.mock.calls[0];
+    if (!call) throw new Error("Expected a gateway request");
+    const [payload, options] = call;
     expect(payload.model).toBe("openai/gpt-6-astra");
     expect(payload.max_output_tokens).toBe(4096);
     expect(payload.reasoning).toEqual({ effort: "low", summary: "auto" });
