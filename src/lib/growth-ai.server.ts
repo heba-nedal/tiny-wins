@@ -6,7 +6,7 @@ import { growSchema, monthlySchema, validateGrow, validateMonthly } from "./grow
 import type { AiCode, AiLanguage } from "./growth-ai";
 import type { GrowthRecord } from "./growth-data.server";
 
-const LANGUAGE_RULES: Record<AiLanguage, string> = {
+export const LANGUAGE_RULES: Record<AiLanguage, string> = {
   en: "OUTPUT LANGUAGE: Write every field in English, even if some achievements are written in Arabic. Address the user as 'you'. Keep achievement titles exactly as written. Refer to the month only by the provided monthLabel, and say 'next month' for the following month.",
   ar: "OUTPUT LANGUAGE: Write every field in clear, warm Modern Standard Arabic (فصحى مبسطة), even if some achievements are written in English. Use gender-neutral wording: do not use second-person verb forms or the pronouns أنتَ/أنتِ (avoid for example: يمكنك, تحتاج/تحتاجين, خصّص/خصّصي, يساعدك). Use impersonal phrasing, verbal nouns, or possessives instead (for example: 'يمكن البناء على هذا الإنجاز', 'تخصيص 10 دقائق', 'خطوتك التالية'). Use Western digits (0-9). Keep any English achievement title exactly as written; do not translate it. Refer to the month only by the provided monthLabel, and say 'الشهر القادم' for the following month.",
 };
