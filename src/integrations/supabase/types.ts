@@ -157,6 +157,34 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_due_future_letters: {
+        Args: never
+        Returns: {
+          created_at: string
+          deliver_at: string
+          email_attempts: number
+          email_claimed_at: string | null
+          email_last_error: string | null
+          email_sent_at: string | null
+          email_status: string
+          id: string
+          message: string
+          timezone: string | null
+          title: string | null
+          updated_at: string
+          user_id: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "future_letters"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      get_future_letter_user_email: {
+        Args: { p_user_id: string }
+        Returns: string
+      }
       link_telegram: {
         Args: { p_chat_id: number; p_token: string }
         Returns: Json
