@@ -32,10 +32,11 @@ function Layout() {
       <header className="border-b bg-background/80">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-4">
           <Link to="/dashboard"><Brand /></Link>
-          <nav className="flex items-center gap-1">
+          <nav className="flex max-w-full flex-wrap items-center gap-1">
             <Link to="/dashboard" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.dashboard")}</Link>
             <Link to="/gallery" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.gallery")}</Link>
             <Link to="/letters" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.letters")}</Link>
+            <Link to="/assistant" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.assistant")}</Link>
             <span className="mx-2 hidden h-5 w-px bg-border sm:block" aria-hidden />
             <LanguageSwitcher className="me-1" />
             <Button variant="ghost" size="sm" onClick={signOut} aria-label={t("nav.signOut")}><LogOut className="rtl:-scale-x-100" /> <span className="hidden sm:inline">{t("nav.signOut")}</span></Button>

@@ -1,0 +1,62 @@
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import i18n from "@/i18n";
+import { localToday } from "@/lib/assistant";
+const mocks = vi.hoisted(() => ({ ask: vi.fn() }));
+vi.mock("@tanstack/react-start", () => ({ useServerFn: (fn: unknown) => fn }));
+vi.mock("@/lib/assistant.functions", () => ({ askWins: mocks.ask }));
+vi.mock("./win-form-dialog", () => ({ WinFormDialog: ({ open }: { open: boolean }) => open ? <div role="dialog">Add win dialog</div> : null }));
+import { WinsAssistant } from "./wins-assistant";
+afterEach(cleanup);
+beforeEach(async () => { mocks.ask.mockReset(); await i18n.changeLanguage("en"); });
+describe("single-turn assistant UI", () => {
+  it("suggestions focus and fill but do not send; blank requests stay local", () => {
+    render(<WinsAssistant />);
+    fireEvent.click(screen.getByRole("button", { name: "Ask" }));
+    expect(screen.getByRole("alert")).toHaveTextContent("Please type a question.");
+    fireEvent.click(screen.getByRole("button", { name: "What were my main wins this month?" }));
+    expect(screen.getByRole("textbox")).toHaveValue("What were my main wins this month?");
+    expect(screen.getByRole("textbox")).toHaveFocus();
+    expect(mocks.ask).not.toHaveBeenCalled();
+  });
+  it("sends Enter but not Shift+Enter; only latest question is sent and latest answer shown", async () => {
+    mocks.ask.mockResolvedValueOnce({ status: "ok", found: true, answer: "First answer", sources: [{ id: "1", title: "Saved title", achievement_date: "2026-11-03", category: "learning" }] }).mockResolvedValueOnce({ status: "ok", found: false, answer: "Untrusted output" });
+    render(<WinsAssistant />); const text = screen.getByRole("textbox");
+    fireEvent.change(text, { target: { value: "First question" } });
+    fireEvent.keyDown(text, { key: "Enter", shiftKey: true });
+    expect(mocks.ask).not.toHaveBeenCalled();
+    fireEvent.keyDown(text, { key: "Enter" });
+    await screen.findByText("First answer");
+    expect(screen.getByText("Saved title")).toBeInTheDocument();
+    fireEvent.change(text, { target: { value: "Second question" } });
+    fireEvent.click(screen.getByRole("button", { name: "Ask" }));
+    await screen.findByText(i18n.t("assistant.notFound"));
+    expect(screen.queryByText("First answer")).toBeNull();
+    expect(screen.queryByText("Saved title")).toBeNull();
+    expect(screen.queryByText("Untrusted output")).toBeNull();
+    expect(screen.queryByText(i18n.t("assistant.disclaimer"))).toBeNull();
+    expect(mocks.ask).toHaveBeenLastCalledWith({ data: { question: "Second question", language: "en", today: localToday() } });
+  });
+  it("blocks concurrent requests and opens the existing dialog for empty wins", async () => {
+    let resolve: (v: unknown) => void = () => {};
+    mocks.ask.mockImplementation(() => new Promise(done => { resolve = done; }));
+    render(<WinsAssistant />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "My wins?" } });
+    fireEvent.click(screen.getByRole("button", { name: "Ask" }));
+    fireEvent.keyDown(screen.getByRole("textbox"), { key: "Enter" });
+    expect(screen.getByRole("textbox")).toBeDisabled();
+    expect(mocks.ask).toHaveBeenCalledTimes(1);
+    await act(async () => resolve({ status: "empty_wins" }));
+    fireEvent.click(screen.getByRole("button", { name: "Add a Win" }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+  it("sends Arabic UI language and translates stable errors", async () => {
+    await i18n.changeLanguage("ar");
+    mocks.ask.mockResolvedValue({ status: "error", code: "rate_limited" });
+    render(<WinsAssistant />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "سؤال" } });
+    fireEvent.click(screen.getByRole("button", { name: "إرسال" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent(i18n.t("ai.errors.rateLimited"));
+    expect(mocks.ask).toHaveBeenCalledWith({ data: { question: "سؤال", language: "ar", today: localToday() } });
+  });
+});

@@ -1,4 +1,6 @@
 # Tiny Wins enhancements
+- [x] Add signed-in Wins Assistant, owner-only paginated reads, computed stats, grounded sources, and transient bilingual UI; 98 tests passed, build OK, signed-out access redirects to sign-in. No schema or existing AI behavior changes.
+- [ ] Wins Assistant live signed-in question/answer and real-account source verification (blocked: external unmanaged Supabase has no available authenticated testing session).
 - [x] Add only the existing-field LinkedIn draft permission switch and date indicators; defaults, editing, insert/update payloads, and indicators covered by passing tests; no schema changes. Live signed-in save/readback remains unavailable with external unmanaged Supabase.
 - [x] Add only the Telegram dashboard linking card and Telegram source badges; all five states covered by automated tests; 73 tests passed, build OK, no schema changes.
 - [ ] Live Telegram linking/unlinking and authenticated dashboard visual verification (blocked: external Supabase has no available signed-in testing session).
