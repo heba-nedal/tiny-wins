@@ -32,7 +32,7 @@ function Layout() {
       <header className="border-b bg-background/80">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-4">
           <Link to="/dashboard"><Brand /></Link>
-          <nav className="flex items-center gap-1">
+          <nav className="flex max-w-full flex-wrap items-center gap-1">
             <Link to="/dashboard" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.dashboard")}</Link>
             <Link to="/gallery" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.gallery")}</Link>
             <Link to="/letters" className={nav} activeProps={{ className: "bg-sage text-heading" }}>{t("nav.letters")}</Link>
