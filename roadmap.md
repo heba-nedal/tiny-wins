@@ -1,4 +1,6 @@
 # Tiny Wins enhancements
+- [x] Add initials account menu and authenticated settings using only Auth display metadata; 114 tests passed, including immediate avatar refresh and menu-selected Arabic AI request payloads; public switchers browser-checked, build OK, no database changes.
+- [ ] Live account name save/readback and signed-in settings visual verification (blocked: external unmanaged Supabase has no available authenticated testing session).
 - [x] Add signed-in Wins Assistant, owner-only paginated reads, computed stats, grounded sources, and transient bilingual UI; 98 tests passed, build OK, signed-out access redirects to sign-in. No schema or existing AI behavior changes.
 - [ ] Wins Assistant live signed-in question/answer and real-account source verification (blocked: external unmanaged Supabase has no available authenticated testing session).
 - [x] Add only the existing-field LinkedIn draft permission switch and date indicators; defaults, editing, insert/update payloads, and indicators covered by passing tests; no schema changes. Live signed-in save/readback remains unavailable with external unmanaged Supabase.
