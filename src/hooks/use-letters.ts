@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Letter } from "@/lib/letters";
 
 const KEY = ["letters"];
-const COLS = "id,user_id,title,message,deliver_at,timezone,email_status,email_sent_at,created_at";
+const COLS = "id,user_id,title,message,deliver_at,timezone,email_status,email_attempts,email_sent_at,created_at";
 
 export function useLetters() {
   return useQuery({
