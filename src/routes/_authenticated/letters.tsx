@@ -11,7 +11,7 @@ import { LetterFormDialog } from "@/components/letter-form-dialog";
 import { LetterCountdown } from "@/components/letter-countdown";
 import { useCancelLetter, useLetters, useNow } from "@/hooks/use-letters";
 import { formatDate } from "@/lib/format-date";
-import { formatDelivery, splitLetters, type Letter } from "@/lib/letters";
+import { formatDelivery, letterEmailState, splitLetters, type Letter } from "@/lib/letters";
 
 export const Route = createFileRoute("/_authenticated/letters")({
   head: () => ({
@@ -90,7 +90,7 @@ function LettersPage() {
                 {delivered.map((l) => (
                   <button key={l.id} onClick={() => setReading(l)} className="space-y-1 rounded-2xl border bg-card/70 p-5 text-start transition-colors hover:border-primary">
                     <h3 className="flex items-center gap-2 text-lg font-semibold"><MailOpen className="h-4 w-4 text-primary" /><span dir="auto" className="text-start">{l.title ?? t("letters.untitled")}</span></h3>
-                    <p className="text-sm text-muted-foreground">{t("letters.opened", { date: formatDelivery(l.deliver_at) })}{t(l.email_status === "sent" ? "letters.emailed" : "letters.notEmailed")}</p>
+                    <p className="text-sm text-muted-foreground">{t("letters.opened", { date: formatDelivery(l.deliver_at) })}{t(({ sent: "letters.emailed", pending: "letters.emailPending", failed: "letters.emailFailed" } as const)[letterEmailState(l)])}</p>
                   </button>
                 ))}
               </div>

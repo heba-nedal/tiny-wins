@@ -1,10 +1,22 @@
 import { describe, expect, it } from "vitest";
-import { countdown, splitLetters, validateLetter, type Letter } from "./letters";
+import { countdown, letterEmailState, splitLetters, validateLetter, type Letter } from "./letters";
 
 const now = new Date(2026, 9, 19, 12, 0);
-const base = { user_id: "u", title: null, message: "hi", timezone: null, email_status: "not_sent", email_sent_at: null, created_at: "" };
+const base = { user_id: "u", title: null, message: "hi", timezone: null, email_status: "not_sent", email_attempts: 0, email_sent_at: null, created_at: "" };
 
 describe("letters", () => {
+  it("reports sent regardless of attempt count", () => {
+    expect(letterEmailState({ email_status: "sent", email_attempts: 3 })).toBe("sent");
+  });
+  it.each(["not_sent", "sending"])("reports %s as pending", (email_status) => {
+    expect(letterEmailState({ email_status, email_attempts: 3 })).toBe("pending");
+  });
+  it("reports failed below 3 attempts as pending", () => {
+    expect(letterEmailState({ email_status: "failed", email_attempts: 2 })).toBe("pending");
+  });
+  it.each([3, 4])("reports failed at %i attempts as failed", (email_attempts) => {
+    expect(letterEmailState({ email_status: "failed", email_attempts })).toBe("failed");
+  });
   it("accepts a valid future letter", () => {
     expect(validateLetter({ title: "", message: "Dear me", deliverLocal: "2026-10-20T09:00" }, now)).toEqual({});
   });

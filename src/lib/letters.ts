@@ -15,6 +15,7 @@ export type Letter = {
   deliver_at: string;
   timezone: string | null;
   email_status: string;
+  email_attempts: number;
   email_sent_at: string | null;
   created_at: string;
 };
@@ -45,6 +46,12 @@ export function validateLetter(v: LetterInput, now: Date = new Date()): LetterEr
 }
 
 export const isDelivered = (l: Pick<Letter, "deliver_at">, now: number) => new Date(l.deliver_at).getTime() <= now;
+
+export function letterEmailState(letter: Pick<Letter, "email_status" | "email_attempts">): "sent" | "pending" | "failed" {
+  if (letter.email_status === "sent") return "sent";
+  if (letter.email_status === "failed" && letter.email_attempts >= 3) return "failed";
+  return "pending";
+}
 
 export function splitLetters(letters: Letter[], now: number) {
   const upcoming = letters.filter((l) => !isDelivered(l, now)).sort((a, b) => a.deliver_at.localeCompare(b.deliver_at));
