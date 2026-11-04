@@ -1,5 +1,6 @@
 {
   "meta": {
+    "settings": {"title": "Account settings · Tiny Wins", "description": "Manage your display name and language."},
     "assistant": { "title": "Wins Assistant · Tiny Wins", "description": "Ask questions about your saved wins. Answers come only from your own records." },
     "landing": { "title": "Tiny Wins — Small steps. Real progress.", "description": "A calm personal gallery for recognizing and celebrating your small accomplishments." },
     "auth": { "title": "Sign in · Tiny Wins", "description": "Sign in or create your Tiny Wins account." },
@@ -215,5 +216,23 @@
     "emptyWins": "You haven't saved any wins yet. Once you add a few, you can ask questions about them.",
     "emptyQuestion": "Please type a question.",
     "counter": "{{count}}/{{max}}"
+  },
+  "account": {"menuLabel": "Account menu", "defaultName": "My account", "settings": "Account settings"},
+  "settings": {
+    "title": "Account settings",
+    "subtitle": "Your display name, language and sign-in details.",
+    "profile": "Profile",
+    "nameLabel": "Display name",
+    "namePlaceholder": "A name for your account",
+    "nameHint": "Optional. Only you can see it, and it is never sent to any AI service.",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Name saved.",
+    "saveError": "Couldn't save your name. Please try again.",
+    "nameTooLong": "The name can be up to {{max}} characters.",
+    "emailLabel": "Email",
+    "emailNote": "The email address can't be changed here.",
+    "languageLabel": "Language",
+    "languageHint": "Applies to the interface and to the language of AI answers."
   }
 }
