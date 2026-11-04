@@ -19,3 +19,4 @@
 - UI strings live in `src/i18n/locales/*.json` and render via `t()`; dates go through `src/lib/format-date.ts`; the saved language is applied shortly after first render in `__root.tsx` so SSR/hydration stay English-consistent. Stored values (categories, user text) are never translated.
 - Telegram linking uses the existing tables through a narrow client-side type bridge with RLS; read only linked_at, insert only language, and scope unlink to the current account to preserve database defaults and chat privacy.
 - Wins Assistant uses a protected server function with owner-scoped paginated reads, code-computed statistics and row-built sources; its SDK call and transient UI are isolated from existing reflections to preserve their behavior.
+- Share display-only Auth user state through the authenticated AccountProvider and reuse its existing sign-out callback; updateUser results refresh both settings and the header without changing auth guards or AI inputs.
