@@ -157,7 +157,7 @@
       "whenLabel": "Open on",
       "timezone": "Time zone:",
       "localTime": "your local time",
-      "notice": "Your letter will open here in Tiny Wins at that time. Email delivery isn't switched on yet, so no email will be sent for now.",
+      "notice": "Your letter will open here in Tiny Wins at that time, and a copy will be emailed to your account address.",
       "seal": "Seal letter",
       "sealing": "Sealing…",
       "sealed": "Letter sealed. It opens here on {{date}}.",
