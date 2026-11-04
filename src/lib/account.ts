@@ -3,7 +3,7 @@ import type { User } from "@supabase/supabase-js";
 export const DISPLAY_NAME_MAX = 40;
 
 export function accountDisplayName(user: User): string {
-  const value: unknown = user.user_metadata.display_name;
+  const value: unknown = user.user_metadata["display_name"];
   return typeof value === "string" ? value.trim() : "";
 }
 
