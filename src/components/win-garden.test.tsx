@@ -9,7 +9,6 @@ import {
 } from "@tanstack/react-router";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { WinGarden } from "./win-garden";
-import { gardenPlants } from "@/lib/garden";
 import type { Win } from "@/lib/wins";
 
 const win = (id: string, category: Win["category"], title: string): Win => ({
@@ -67,9 +66,8 @@ describe("WinGarden stats", () => {
   it("reports the wins it was given, not a fixed number", async () => {
     await renderGarden(threeWins);
 
-    expect(statValue("Flowers bloomed")).toBe(
-      String(gardenPlants(threeWins).filter((p) => p.variant === "flower").length),
-    );
+    expect(statValue("Your recorded wins")).toBe("3");
+    expect(screen.getByTestId("garden-progress").textContent).toBe("3 of 10 toward 10");
     expect(screen.getByRole("link", { name: /see all wins/i })).toHaveAttribute(
       "href",
       "/gallery",
@@ -81,6 +79,8 @@ describe("WinGarden stats", () => {
       win("d4", "learning", "Practiced a chord"),
       win("e5", "learning", "Reviewed notes"),
     ]);
+    expect(statValue("Your recorded wins")).toBe("2");
+    expect(screen.getByText("Beginning to grow")).toBeInTheDocument();
     expect(screen.queryByText("Total wins")).toBeNull();
     expect(screen.queryByText("Categories")).toBeNull();
   });

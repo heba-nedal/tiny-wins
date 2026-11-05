@@ -1,51 +1,27 @@
 import { describe, expect, it } from "vitest";
-import { gardenPlants, gardenStats, plantFor, MAX_PLANTS } from "./garden";
-import type { Win } from "./wins";
+import { gardenGrowth } from "./garden";
 
-const win = (id: string, category: Win["category"] = "everyday"): Win => ({
-  id,
-  title: `Win ${id}`,
-  description: null,
-  category,
-  achievement_date: "2026-10-16",
-  created_at: "2026-10-16T00:00:00Z",
-  user_id: "user-1",
-});
-
-describe("plantFor", () => {
-  it("maps the same achievement to the same plant after every render", () => {
-    const a = win("11111111-1111-1111-1111-111111111111");
-    expect(plantFor(a)).toEqual(plantFor({ ...a }));
+describe("gardenGrowth", () => {
+  it("shows 0 for an account with no wins", () => {
+    expect(gardenGrowth(0)).toMatchObject({ total: 0, progress: 0, stage: "start", target: 10 });
   });
-
-  it("always returns a known plant variant", () => {
-    for (const id of ["a", "b", "c", "d", "e"]) {
-      expect(["sprout", "leaf", "flower"]).toContain(plantFor(win(id)).variant);
-    }
+  it("uses the stage ranges 1–2, 3–5, 6–9", () => {
+    expect(gardenGrowth(2).stage).toBe("beginning");
+    expect(gardenGrowth(3).stage).toBe("growing");
+    expect(gardenGrowth(5).stage).toBe("growing");
+    expect(gardenGrowth(6).stage).toBe("blooming");
+    expect(gardenGrowth(9).stage).toBe("blooming");
   });
-});
-
-describe("gardenPlants", () => {
-  it("caps the visual density while every win stays accounted for", () => {
-    const wins = Array.from({ length: MAX_PLANTS + 6 }, (_, i) => win(`id-${i}`));
-    expect(gardenPlants(wins)).toHaveLength(MAX_PLANTS);
+  it("8 wins → 8/10", () => {
+    expect(gardenGrowth(8)).toMatchObject({ progress: 8, target: 10 });
   });
-});
-
-describe("gardenStats", () => {
-  it("counts real achievements, distinct categories, and rendered flowers", () => {
-    const stats = gardenStats([
-      win("1", "learning"),
-      win("2", "learning"),
-      win("3", "health_habits"),
-    ]);
-    expect(stats.total).toBe(3);
-    expect(stats.categories).toBe(2);
-    expect(stats.flowers).toBe(gardenPlants([
-      win("1", "learning"),
-      win("2", "learning"),
-      win("3", "health_habits"),
-    ]).filter((p) => p.variant === "flower").length);
-    expect(stats.hidden).toBe(0);
+  it("10 wins completes the milestone", () => {
+    expect(gardenGrowth(10)).toMatchObject({ progress: 10, stage: "milestone", milestones: 1 });
+  });
+  it("13 wins → 3/10 toward 20", () => {
+    expect(gardenGrowth(13)).toMatchObject({ total: 13, progress: 3, target: 20 });
+  });
+  it("25 wins → 5/10 toward 30", () => {
+    expect(gardenGrowth(25)).toMatchObject({ total: 25, progress: 5, target: 30 });
   });
 });

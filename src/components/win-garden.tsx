@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
 import { Flower2, Images, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import winGardenIllustration from "@/assets/win-garden.png";
 import { gardenStats } from "@/lib/garden";
 import type { Win } from "@/lib/wins";
@@ -28,7 +29,7 @@ export function WinGarden({ wins, onAdd }: { wins: Win[]; onAdd: () => void }) {
       ) : (
         <>
           <dl className="mt-5 grid grid-cols-3 gap-4">
-            <div><dt className="text-sm text-muted-foreground">{t("dashboard.garden.flowers")}</dt><dd className="mt-1 font-display text-2xl text-heading">{stats.flowers}</dd></div>
+            <div><dt className="text-sm text-muted-foreground">{t("dashboard.garden.recorded")}</dt><dd className="mt-1 font-display text-2xl text-heading">{stats.total}</dd></div>
           </dl>
 
           <img
@@ -38,6 +39,21 @@ export function WinGarden({ wins, onAdd }: { wins: Win[]; onAdd: () => void }) {
             height={789}
             className="mt-4 h-auto w-full"
           />
+
+          <div className="mt-4 space-y-2">
+            <div className="flex flex-wrap items-baseline justify-between gap-2 text-sm">
+              <span className="font-medium text-heading">{t(`dashboard.garden.stage.${stats.stage}`)}</span>
+              <span className="text-muted-foreground" data-testid="garden-progress">
+                {t("dashboard.garden.progress", { progress: stats.progress, cycle: 10, target: stats.target })}
+              </span>
+            </div>
+            <Progress
+              value={stats.progress * 10}
+              aria-label={t("dashboard.garden.progressLabel", { target: stats.target })}
+              className="rtl:-scale-x-100"
+            />
+            <p className="text-sm text-muted-foreground">{t(`dashboard.garden.message.${stats.stage}`)}</p>
+          </div>
 
           <div className="flex justify-end pt-3">
             <Button variant="outline" asChild>

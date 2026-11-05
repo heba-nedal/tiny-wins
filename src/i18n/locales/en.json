@@ -1,34 +1,108 @@
 {
   "meta": {
-    "settings": {"title": "Account settings · Tiny Wins", "description": "Manage your display name and language."},
-    "assistant": { "title": "Wins Assistant · Tiny Wins", "description": "Ask questions about your saved wins. Answers come only from your own records." },
-    "landing": { "title": "Tiny Wins — Small steps. Real progress.", "description": "A calm personal gallery for recognizing and celebrating your small accomplishments." },
-    "auth": { "title": "Sign in · Tiny Wins", "description": "Sign in or create your Tiny Wins account." },
-    "dashboard": { "title": "Dashboard · Tiny Wins", "description": "Your recent small wins and progress at a glance." },
-    "gallery": { "title": "Gallery · Tiny Wins", "description": "Browse every small win you've recorded." },
-    "letters": { "title": "Letters to Myself · Tiny Wins", "description": "Write sealed letters to your future self and open them when the day arrives." }
+    "settings": {
+      "title": "Account settings · Tiny Wins",
+      "description": "Manage your display name and language."
+    },
+    "assistant": {
+      "title": "Wins Assistant · Tiny Wins",
+      "description": "Ask questions about your saved wins. Answers come only from your own records."
+    },
+    "landing": {
+      "title": "Tiny Wins — Small steps. Real progress.",
+      "description": "A calm personal gallery for recognizing and celebrating your small accomplishments."
+    },
+    "auth": {
+      "title": "Sign in · Tiny Wins",
+      "description": "Sign in or create your Tiny Wins account."
+    },
+    "dashboard": {
+      "title": "Dashboard · Tiny Wins",
+      "description": "Your recent small wins and progress at a glance."
+    },
+    "gallery": {
+      "title": "Gallery · Tiny Wins",
+      "description": "Browse every small win you've recorded."
+    },
+    "letters": {
+      "title": "Letters to Myself · Tiny Wins",
+      "description": "Write sealed letters to your future self and open them when the day arrives."
+    }
   },
-  "language": { "switchLabel": "Switch language to Arabic", "label": "Language" },
-  "monthPicker": { "choose": "Choose month", "prevYear": "Previous year", "nextYear": "Next year" },
-  "nav": { "dashboard": "Dashboard", "gallery": "Gallery", "letters": "Letters", "assistant": "Assistant", "signOut": "Sign out" },
-  "common": { "tryAgain": "Try again", "cancel": "Cancel", "keepIt": "Keep it", "delete": "Delete", "edit": "Edit", "optional": "(optional)", "addWin": "Add a Win", "recordFirstWin": "Record your first win", "close": "Close" },
+  "language": {
+    "switchLabel": "Switch language to Arabic",
+    "label": "Language"
+  },
+  "monthPicker": {
+    "choose": "Choose month",
+    "prevYear": "Previous year",
+    "nextYear": "Next year"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "gallery": "Gallery",
+    "letters": "Letters",
+    "assistant": "Assistant",
+    "signOut": "Sign out"
+  },
+  "common": {
+    "tryAgain": "Try again",
+    "cancel": "Cancel",
+    "keepIt": "Keep it",
+    "delete": "Delete",
+    "edit": "Edit",
+    "optional": "(optional)",
+    "addWin": "Add a Win",
+    "recordFirstWin": "Record your first win",
+    "close": "Close"
+  },
   "landing": {
     "signIn": "Sign in",
-    "hero": { "title1": "Small steps.", "title2": "Real progress.", "subtitle": "Every little achievement deserves a place. Tiny Wins is a quiet gallery for the things you did today.", "cta": "Start your gallery" }
+    "hero": {
+      "title1": "Small steps.",
+      "title2": "Real progress.",
+      "subtitle": "Every little achievement deserves a place. Tiny Wins is a quiet gallery for the things you did today.",
+      "cta": "Start your gallery"
+    }
   },
-  "illustration": { "staircaseAlt": "Watercolor illustration of stairs with growing plants and a star", "gardenAlt": "Illustration of a garden path with flat stepping stones, rounded stones, sage shrubs, lavender stalks and peach daisies." },
+  "illustration": {
+    "staircaseAlt": "Watercolor illustration of stairs with growing plants and a star",
+    "gardenAlt": "Illustration of a garden path with flat stepping stones, rounded stones, sage shrubs, lavender stalks and peach daisies."
+  },
   "auth": {
     "tagline": "Every little achievement deserves a place.",
-    "checkEmail": { "title": "Check your email", "body": "We sent a confirmation link to {{email}}. Open it to finish signing up.", "back": "Back to sign in" },
-    "signIn": { "title": "Welcome back", "subtitle": "Sign in to see your wins.", "submit": "Sign in", "switchPrompt": "New here?", "switchAction": "Create an account" },
-    "signUp": { "title": "Create your account", "subtitle": "Start celebrating the small stuff.", "submit": "Sign up", "switchPrompt": "Already have an account?", "switchAction": "Sign in" },
+    "checkEmail": {
+      "title": "Check your email",
+      "body": "We sent a confirmation link to {{email}}. Open it to finish signing up.",
+      "back": "Back to sign in"
+    },
+    "signIn": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to see your wins.",
+      "submit": "Sign in",
+      "switchPrompt": "New here?",
+      "switchAction": "Create an account"
+    },
+    "signUp": {
+      "title": "Create your account",
+      "subtitle": "Start celebrating the small stuff.",
+      "submit": "Sign up",
+      "switchPrompt": "Already have an account?",
+      "switchAction": "Sign in"
+    },
     "email": "Email",
     "password": "Password",
     "wait": "Please wait…",
     "passwordShort": "Password must be at least 6 characters."
   },
   "dashboard": {
-    "hero": { "title1": "Small steps.", "title2": "Real progress.", "subtitle": "Every little achievement deserves a place.", "totalWins": "Total wins", "thisMonth": "This month" },
+    "hero": {
+      "title1": "Small steps.",
+      "title2": "Real progress.",
+      "subtitle": "Every little achievement deserves a place.",
+      "totalWins": "Total wins",
+      "thisMonth": "This month"
+    },
     "growth": {
       "title": "My Growth Story",
       "subtitle": "Every small win is part of a bigger story.",
@@ -63,8 +137,24 @@
       "subtitle": "Every little win helps something grow.",
       "emptyTitle": "Your garden is waiting to grow",
       "emptyBody": "Every win you record plants something new here.",
-      "flowers": "Flowers bloomed",
-      "seeAll": "See all wins"
+      "seeAll": "See all wins",
+      "recorded": "Your recorded wins",
+      "progress": "{{progress}} of {{cycle}} toward {{target}}",
+      "progressLabel": "Progress toward {{target}} wins",
+      "stage": {
+        "start": "A new cycle begins",
+        "beginning": "Beginning to grow",
+        "growing": "Growing",
+        "blooming": "Blooming",
+        "milestone": "Milestone reached"
+      },
+      "message": {
+        "start": "Your next win starts a fresh cycle.",
+        "beginning": "Every small step plants a seed.",
+        "growing": "Your garden keeps growing — keep going.",
+        "blooming": "Your garden is blooming. The next milestone is close.",
+        "milestone": "You completed a growth milestone. Wonderful!"
+      }
     },
     "lettersCard": {
       "title": "A Letter to My Future Self",
@@ -76,9 +166,18 @@
       "nextTitled": "Your next letter — <1>{{title}}</1> opens in:",
       "none": "No letters waiting yet."
     },
-    "recent": { "title": "Recent Wins", "viewAll": "View all" }
+    "recent": {
+      "title": "Recent Wins",
+      "viewAll": "View all"
+    }
   },
-  "gallery": { "title": "Your gallery", "subtitle": "Newest first.", "filterLabel": "Filter by category", "all": "All", "emptyCategory": "No wins in this category yet." },
+  "gallery": {
+    "title": "Your gallery",
+    "subtitle": "Newest first.",
+    "filterLabel": "Filter by category",
+    "all": "All",
+    "emptyCategory": "No wins in this category yet."
+  },
   "wins": {
     "publishableBadge": "Can be used in your LinkedIn draft",
     "loadError": "We couldn't load your wins: {{message}}",
@@ -126,7 +225,13 @@
       "why": "Why This Step Fits"
     }
   },
-  "categories": { "learning": "Learning", "personal_growth": "Personal Growth", "work_projects": "Work & Projects", "health_habits": "Health & Habits", "everyday": "Everyday Wins" },
+  "categories": {
+    "learning": "Learning",
+    "personal_growth": "Personal Growth",
+    "work_projects": "Work & Projects",
+    "health_habits": "Health & Habits",
+    "everyday": "Everyday Wins"
+  },
   "letters": {
     "title": "Letters to Myself",
     "subtitle": "Write to who you're becoming. Letters open here when their time comes.",
@@ -150,7 +255,14 @@
     "written": "Written {{date}}",
     "cancelTitle": "Cancel this letter?",
     "cancelBody": "It will be deleted permanently and won't open on its date.",
-    "countdown": { "label": "Time until this letter opens", "days": "days", "hours": "hours", "min": "min", "sec": "sec", "compact": "{{d}}d {{h}}h {{m}}m {{s}}s" },
+    "countdown": {
+      "label": "Time until this letter opens",
+      "days": "days",
+      "hours": "hours",
+      "min": "min",
+      "sec": "sec",
+      "compact": "{{d}}d {{h}}h {{m}}m {{s}}s"
+    },
     "form": {
       "title": "A letter to my future self",
       "description": "Write it today. Open it when the moment arrives.",
@@ -175,30 +287,56 @@
       "whenSoon": "Choose a time at least a few minutes in the future."
     }
   },
-  "notFound": { "title": "Page not found", "body": "The page you're looking for doesn't exist or has been moved.", "home": "Go home" },
-  "error": { "title": "This page didn't load", "body": "Something went wrong on our end. You can try refreshing or head back home." },
-  "errors": {"generic": "Something went wrong. Please try again.", "auth": {"invalidCredentials": "Incorrect email or password.", "emailNotConfirmed": "Your email isn't confirmed yet. Please open the confirmation link we sent you.", "alreadyRegistered": "An account with this email already exists.", "rateLimit": "Too many attempts. Please wait a moment and try again."}},
-  "ai": {"empty": {"month": "No wins recorded for this month yet. Every little win counts whenever you're ready.", "win": "This win is no longer available. Choose one of your saved wins."}, "errors": {"rateLimited": "Too many requests right now. Please wait a moment and try again.", "unavailable": "The reflection service is temporarily unavailable. Please try again later.", "invalidOutput": "We couldn't prepare a reliable reflection this time. Please try again.", "generic": "Something went wrong while preparing your reflection. Please try again."}},
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or has been moved.",
+    "home": "Go home"
+  },
+  "error": {
+    "title": "This page didn't load",
+    "body": "Something went wrong on our end. You can try refreshing or head back home."
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "auth": {
+      "invalidCredentials": "Incorrect email or password.",
+      "emailNotConfirmed": "Your email isn't confirmed yet. Please open the confirmation link we sent you.",
+      "alreadyRegistered": "An account with this email already exists.",
+      "rateLimit": "Too many attempts. Please wait a moment and try again."
+    }
+  },
+  "ai": {
+    "empty": {
+      "month": "No wins recorded for this month yet. Every little win counts whenever you're ready.",
+      "win": "This win is no longer available. Choose one of your saved wins."
+    },
+    "errors": {
+      "rateLimited": "Too many requests right now. Please wait a moment and try again.",
+      "unavailable": "The reflection service is temporarily unavailable. Please try again later.",
+      "invalidOutput": "We couldn't prepare a reliable reflection this time. Please try again.",
+      "generic": "Something went wrong while preparing your reflection. Please try again."
+    }
+  },
   "telegram": {
-  "title": "Add wins from Telegram",
-  "subtitle": "Send a message to the Tiny Wins bot and it lands in your gallery.",
-  "privacyNote": "Your message text is sent to an AI service to suggest a category. Please keep personal details out of your wins.",
-  "connect": "Link Telegram",
-  "creating": "Creating your link…",
-  "openTelegram": "Open Telegram",
-  "waiting": "Waiting for you to press Start in Telegram…",
-  "expiresIn": "Link expires in {{time}}",
-  "expired": "This link has expired.",
-  "newLink": "Create a new link",
-  "linked": "Telegram is linked ✓",
-  "linkedBody": "Send a small win to the bot anytime and it will appear here.",
-  "unlink": "Unlink",
-  "unlinkTitle": "Unlink Telegram?",
-  "unlinkBody": "The bot will stop saving wins to your account. You can link again anytime.",
-  "unlinked": "Telegram unlinked.",
-  "error": "Couldn't create a link. Please try again.",
-  "sourceBadge": "Added from Telegram"
-},
+    "title": "Add wins from Telegram",
+    "subtitle": "Send a message to the Tiny Wins bot and it lands in your gallery.",
+    "privacyNote": "Your message text is sent to an AI service to suggest a category. Please keep personal details out of your wins.",
+    "connect": "Link Telegram",
+    "creating": "Creating your link…",
+    "openTelegram": "Open Telegram",
+    "waiting": "Waiting for you to press Start in Telegram…",
+    "expiresIn": "Link expires in {{time}}",
+    "expired": "This link has expired.",
+    "newLink": "Create a new link",
+    "linked": "Telegram is linked ✓",
+    "linkedBody": "Send a small win to the bot anytime and it will appear here.",
+    "unlink": "Unlink",
+    "unlinkTitle": "Unlink Telegram?",
+    "unlinkBody": "The bot will stop saving wins to your account. You can link again anytime.",
+    "unlinked": "Telegram unlinked.",
+    "error": "Couldn't create a link. Please try again.",
+    "sourceBadge": "Added from Telegram"
+  },
   "assistant": {
     "title": "Wins Assistant",
     "subtitle": "Ask about your saved wins. Answers come only from what you've recorded.",
@@ -217,7 +355,11 @@
     "emptyQuestion": "Please type a question.",
     "counter": "{{count}}/{{max}}"
   },
-  "account": {"menuLabel": "Account menu", "defaultName": "My account", "settings": "Account settings"},
+  "account": {
+    "menuLabel": "Account menu",
+    "defaultName": "My account",
+    "settings": "Account settings"
+  },
   "settings": {
     "title": "Account settings",
     "subtitle": "Your display name, language and sign-in details.",
